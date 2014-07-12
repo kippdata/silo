@@ -1,0 +1,1 @@
+SQL Code (or for that metter other scripting langugages) that create views from exisiting tables in a data warehouse instance go here.  Developers should develop one for SQL Server and another for PostgreSQL.
