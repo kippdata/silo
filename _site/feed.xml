@@ -2,60 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KIPP Silo</title>
-    <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or lightweight), and Open-source (for now) data warehouse solution.</description>
+    <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 12 Jul 2014 14:06:25 -0500</pubDate>
-    <lastBuildDate>Sat, 12 Jul 2014 14:06:25 -0500</lastBuildDate>
+    <pubDate>Sat, 12 Jul 2014 21:30:05 -0500</pubDate>
+    <lastBuildDate>Sat, 12 Jul 2014 21:30:05 -0500</lastBuildDate>
     <generator>Jekyll v2.1.1</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
-To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+        <title>Introducing KIPP Silo</title>
+        <description>&lt;p&gt;I’m pleased to announce that the &lt;a href=&quot;https://www.kippshare.org/message/12867#12867&quot;&gt;KIPP Network Normed Data Warehouse&lt;/a&gt; (gated) sparked by @jdozier is up and running and Andrew, James, and I have come up with what we think is a relatively clever name:&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/KIPP_Silo_1.png&quot; alt=&quot;KIPP Silo&quot; title=&quot;KIPP Silo&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A silo is ‘a deep bin for storing material’ as is KIPP Silo. KIPP Silo is the KIPP Network’s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Right now things are bare bones, save for the fact we have a GitHub repo which can be cloned or (probably) more likely forked for indiviudal development and collaboration.  In other words, anybody (well anybody who know’s how to use GitHub right now) can start writing and sharing code &lt;strong&gt;right now&lt;/strong&gt;!&lt;/p&gt;
 
+&lt;p&gt;This landing page/website will be used for announcing version releases and providing some tutorials on using the tools we’ll use to coordinate our development efforts at building this.  I’ve started a stub in &lt;a href=&quot;tools.md&quot;&gt;Tools&lt;/a&gt; I cannot convey to all of you how excited I am about this endevour, but I do know that our future selves will thank us!.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 11 Jul 2014 18:15:15 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/jekyll/update/2014/07/11/welcome-to-jekyll%20copy/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/jekyll/update/2014/07/11/welcome-to-jekyll%20copy/</guid>
+        <pubDate>Sat, 12 Jul 2014 18:15:15 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/07/12/lets_build_a_silo/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/12/lets_build_a_silo/</guid>
         
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>This is simply a test!</title>
-        <description>&lt;p&gt;Like the title state, this is a test to see if this breaks Jekyll.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;data&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;nweamap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mapvizier&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;nweamap&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 11 Jul 2014 18:15:15 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/jekyll/update/2014/07/11/jekyll_test/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/jekyll/update/2014/07/11/jekyll_test/</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
