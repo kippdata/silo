@@ -10,6 +10,8 @@ I'm pleased to announce that the [KIPP Network Normed Data Warehouse](https://ww
 
 A ***REMOVED*** is 'a deep bin for storing material' as is KIPP Silo. KIPP Silo is the KIPP Network's Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.
 
-Right now things are bare bones, save for the fact we have a GitHub repo which can be cloned or (probably) more likely forked for indiviudal development and collaboration.  In other words, anybody (well anybody who know's how to use GitHub right now) can start writing and sharing code **right now**!
+Right now things are bare bones, save for the fact we have a [GitHub repo](https://github.com/kippdata/***REMOVED***) which can be cloned or (probably) more likely forked for indiviudal development and collaboration.  In other words, anybody (well anybody who know's how to use GitHub right now) can start writing and sharing code **right now**! 
+
+(For what it's work, I think the best git workflow for this project is either a [forking workflow](https://www.atlassian.com/git/workflows#!workflow-forking) or a [feature branch workflow](https://www.atlassian.com/git/workflows#!workflow-feature-branch)).  My best guess is the former, although requiring a little more overhead will keep the waters of the master branch clearer, so to speak.)
 
 This landing page/website will be used for announcing version releases and providing some tutorials on using the tools we'll use to coordinate our development efforts at building this.  I've started a stub in [Tools](tools.md) I cannot convey to all of you how excited I am about this endevour, but I do know that our future selves will thank us!.
