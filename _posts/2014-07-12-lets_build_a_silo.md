@@ -6,7 +6,7 @@ date:   2014-07-12 23:15:15
 
 I'm pleased to announce that the [KIPP Network Normed Data Warehouse](https://www.kippshare.org/message/12867#12867) (gated) sparked by @jdozier is up and running and Andrew, James, and I have come up with what we think is a relatively clever name:
 
-![KIPP Silo](/images/KIPP_Silo_1.png "KIPP Silo")
+![KIPP Silo]({{ site.baseurl }}/images/KIPP_Silo_1.png "KIPP Silo")
 
 A ***REMOVED*** is 'a deep bin for storing material' as is KIPP Silo. KIPP Silo is the KIPP Network's Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.
 
