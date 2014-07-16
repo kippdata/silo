@@ -16,7 +16,7 @@ KIPP Silo is at heart and by necessity a distrubted development project.  We are
 
 ### Relational Database Management Systems
 * [SQL Server][sql server]
-* [PostgreSQL][postgres]
+* ~~[PostgreSQL][postgres]~~
 
 ### Scripting languages
 * [Python][python]
