@@ -7,11 +7,10 @@ from io import TextIOWrapper
 
 from sqlalchemy import *
 
-'''
-Loads our configuration file, dwim.cfg, located in the same folder
-'''
 def load_config():
-    
+    """
+    Loads our configuaration file, ***REMOVED***conv.cfg, located in the same folder
+    """
     try:
         f = open('***REMOVED***conv.cfg')
     except IOError as err:
@@ -23,10 +22,10 @@ def load_config():
 
             config = json.load(f)
 
-'''
-Connects to our database to run neededs processes.
-'''
 def db_connect():
+    """
+    Connects to our data warehouse to run needed processes.
+    """
 
     #Start our sqlalchemy engine.
     global dwengine
@@ -39,10 +38,11 @@ def db_connect():
 
     dwconn = dwengine.connect()
 
-'''
-Generates the sqlalchemy database url, dependant on settings in dwim.cfg
-'''
 def generate_db_url():
+    """
+    Generates the sqlalchemy database url, dependant on setting in ***REMOVED***conv.cfg
+    :return:String of database url
+    """
     base = ''
 
     base += config['server-dialect']
@@ -66,10 +66,11 @@ def generate_db_url():
 
     return base
 
-'''
-Import the AssessmentResults.csv file into the map_table.
-'''
 def import_map(path):
+    """
+    Import the AssessmentResults.csv file into map_table.
+    :param path: Path location of the file to import.
+    """
     file_ext = path[-3:]
     if file_ext.lower() == 'zip':
         with zipfile.ZipFile(path) as mapzip:
@@ -89,11 +90,11 @@ def import_map(path):
 
     dwconn.execute(map_table.insert(), results)    
 
-'''
-Checks that the map_table exists in the data warehouse.
-If not, create it.
-'''
 def check_map_table():
+    """
+    Checks that the map_table exists in the data warehouse.
+    If not, create it.
+    """
     metadata = MetaData()
 
     global map_table
@@ -171,6 +172,11 @@ def check_map_table():
 Deals with the conversion of Strings from the csv into correct data types
 '''
 def convert_map_strings(results):
+    """
+    Handles conversion of csv Strings into correct data types
+    :param results: The results from the csv read of the imported file
+    :return:Returns corrected results list.
+    """
     for result in results:
         result['StudentID'] = convert_to_int(result['StudentID'])
         if result['GrowthMeasureYN'] == 'TRUE':
@@ -233,19 +239,23 @@ def convert_map_strings(results):
 
     return results
 
-'''
-Converts a String to an integer. If blank returns None
-'''
 def convert_to_int(string):
+    """
+    Converts a String to an integer. If blank returns None.
+    :param string: String to convert.
+    :return:None or int of String
+    """
     if string == '':
         return None
     else:
         return int(string)
 
-'''
-Converts a String to a float. If blank returns Non
-'''
 def convert_to_float(string):
+    """
+    Converts a String to a float. If blank returns None.
+    :param string: String to convert.
+    :return:None or float of String
+    """
     if string == '':
         return None
     else:
