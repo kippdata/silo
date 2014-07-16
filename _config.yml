@@ -6,7 +6,10 @@ baseurl: "/***REMOVED***"
 url: "http://kippdata.github.io/***REMOVED***"
 twitter_username: chrishaid
 github_username:  kippdata
-
+gems:
+  - jekyll-mentions
 # Build settings
 markdown: kramdown
 permalink: pretty
+kramdown:
+     input: GFM
