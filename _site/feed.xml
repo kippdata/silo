@@ -5,9 +5,31 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 15 Jul 2014 22:35:11 -0500</pubDate>
-    <lastBuildDate>Tue, 15 Jul 2014 22:35:11 -0500</lastBuildDate>
+    <pubDate>Mon, 28 Jul 2014 11:48:54 -0500</pubDate>
+    <lastBuildDate>Mon, 28 Jul 2014 11:48:54 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>KIPP Silo @ KSS Day 1</title>
+        <description>&lt;p&gt;If you are in Houston this Monday morning or afternoon, Andrew (&lt;a href=&quot;https://github.com/almartin82&quot; class=&quot;user-mention&quot;&gt;@almartin82&lt;/a&gt;), Erin Gunn (&lt;a href=&quot;https://github.com/eringunn&quot; class=&quot;user-mention&quot;&gt;@eringunn&lt;/a&gt;), Arie Glazier (&lt;a href=&quot;https://github.com/arieglazier&quot; class=&quot;user-mention&quot;&gt;@arieglazier&lt;/a&gt;) (he’s new and with &lt;a href=&quot;http://www.kippneworleans.org&quot;&gt;KIPP New Orleans&lt;/a&gt; so be sure say hi to him ), and I  (&lt;a href=&quot;https://github.com/chrishaid&quot; class=&quot;user-mention&quot;&gt;@chrishaid&lt;/a&gt;) are working in 342 D of the GRB Conference Center. Here’s handy map:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Monday.png&quot; alt=&quot;KSS Map Day 1&quot; title=&quot;KSS Map Day 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Come visit us if you want to work on data warehousing, etc. Hopefully we can find a home base (I’m thinking the Grit or Optimism Lounges once they open).  &lt;/p&gt;
+
+&lt;p&gt;Also, please forward this information to any and all who want to work some data stuff!&lt;/p&gt;
+
+&lt;p&gt;Looking forward to seeing you all,&lt;/p&gt;
+
+&lt;p&gt;Chris and Andrew (and James in spirit).&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 28 Jul 2014 06:00:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/07/28/KSS-day-one/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/28/KSS-day-one/</guid>
+        
+        
+      </item>
     
       <item>
         <title>First Real Commit!!!</title>
