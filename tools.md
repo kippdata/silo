@@ -16,11 +16,10 @@ KIPP Silo is at heart and by necessity a distrubted development project.  We are
 
 ### Relational Database Management Systems
 * [SQL Server][sql server]
-* ~~[PostgreSQL][postgres]~~
 
 ### Scripting languages
 * [Python][python]
-* [R][R] Slow, but well understood by folks in the network.  `R` has a tremendously helpful and active user community and an amazing universe of add on packages.  It's graphical capabilities, especially the [ggplot2](https://www.ggplot2.org) pacakge, are really unparalled
+* [R][R] Slow, but well understood by folks in the network.  R has a tremendously helpful and active user community and an amazing universe of add on packages.  It's graphical capabilities, especially the [ggplot2](https://www.ggplot2.org) pacakge, are really unparalled
 * [Julia][julia] If you really want to be in the avant-guarde of scientific computing and high performance interpreted languages that use JIT compilers, feel free. 
 
 
