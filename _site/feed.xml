@@ -5,9 +5,60 @@
     <description>A ***REMOVED*** is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/***REMOVED***/</link>
     <atom:link href="http://kippdata.github.io/***REMOVED***/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 28 Jul 2014 11:48:54 -0500</pubDate>
-    <lastBuildDate>Mon, 28 Jul 2014 11:48:54 -0500</lastBuildDate>
+    <pubDate>Tue, 29 Jul 2014 06:20:20 -0500</pubDate>
+    <lastBuildDate>Tue, 29 Jul 2014 06:20:20 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>GitHub and Git Tutorials</title>
+        <description>&lt;p&gt;So I promised everyone new to distributed development projects a tutorial of sorts on &lt;a href=&quot;http://www.GitHub.com&quot;&gt;GitHub&lt;/a&gt; and its underlying version control system &lt;a href=&quot;http://Git-scm.com&quot;&gt;Git&lt;/a&gt;. Rather than writing a super long tutorial and in the spirit of “not reinventing the wheel”, I hope dear readers you’ll forgive me for creating this &lt;strong&gt;Resource Roundup&lt;/strong&gt;.  And rather than be a brain dump of links, this roundup will be curated and sectioned so your can jump in where you feel most comfortable.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-are-git-and-github-anyhow&quot;&gt;What are Git and GitHub, anyhow?&lt;/h2&gt;
+
+&lt;h3 id=&quot;github&quot;&gt;GitHub&lt;/h3&gt;
+&lt;p&gt;GitHub at its core is a social networking site, not unlike &lt;a href=&quot;https://wwww.facebook.com&quot;&gt;Facebook&lt;/a&gt; or even &lt;a href=&quot;http://www.kippshare.org&quot;&gt;KIPP Share&lt;/a&gt;. You have a profile, follow folks, and can even post stuff. The stuff you post, however, is where GitHub differs from traditional social networking sites. You (usually, but not exclusively) post the code and documents of the projects you are working on the site. So &lt;em&gt;de minimus&lt;/em&gt;, GitHub gives you a secondary storage place (the first is likley your laptop) for all of your work. You can save any type of file there, not just lines of code. And having a second copy of your work is really awesome when you computer blows up or you somehow write over &lt;a href=&quot;/images/Data_system_diagram.svg&quot; title=&quot;KIPP Chicago Data Systems&quot;&gt;that awesome data flow diagram you were putting together for KSS&lt;/a&gt;(this happended to me!).&lt;/p&gt;
+
+&lt;p&gt;Nevertheless, GitHub really shines at hosting code repositories and supporting software development.  At the heart of its support is the Git &lt;a href=&quot;http://Git-scm.com/video/what-is-version-control&quot;&gt;version control&lt;/a&gt; system.  And GitHub makes Git super easy to use by providing a visual user interface and a place to host your repositories (the set-up of which is a snap and really well documented).  Of course, you can always use GitHub from the command line.&lt;/p&gt;
+
+&lt;h3 id=&quot;git&quot;&gt;Git&lt;/h3&gt;
+&lt;p&gt;Git is version control software, which means it manages changes to a project without overwriting any part of that project.  Saving everything you’ve ever done means that (i) you can always revert to an earlier version of anything you are working on if you aren’t pleased with your progress and (ii) you can work through changes made by other people, say Andrew Martin and myself, &lt;em&gt;on the same document&lt;/em&gt;!  Git will save my version, Andrew’s version, the version we both started working from, and provides and interface to identify differences between the three documents and merge them together into one new document. It’s a bit like &lt;a href=&quot;https://www.google.com/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=2&amp;amp;ved=0CCsQFjAB&amp;amp;url=http%3A%2F%2Foffice.microsoft.com%2Fen-us%2Fword-help%2Ftrack-changes-while-you-edit-HA001218690.aspx&amp;amp;ei=X4DXU8SoIvHO8QGd_oCYDg&amp;amp;usg=AFQjCNEoPwfzhJ8KMQ4nP5gEdQ4KRtCxEQ&amp;amp;sig2=OyBmNiL6lUojR1el2DtnHQ&amp;amp;bvm=bv.71778758,d.b2U&quot;&gt;Word’s Track Changes&lt;/a&gt; feature but you always have every copy of every version everyone ever put together without having to save a zillion files with different names (and naming conventions when working with others).&lt;/p&gt;
+
+&lt;p&gt;So in the end, using Git and GitHub gives you a system for backing-up, version controlling, and collaboratively sharing your work.&lt;/p&gt;
+
+&lt;p&gt;(Awseome fun Git fact for nerds: you have the inventor or &lt;a href=&quot;http://www.linux.com/&quot;&gt;Linux&lt;/a&gt; to thank for Git: &lt;a href=&quot;http://en.wikipedia.org/wiki/Linus_Torvalds&quot;&gt;Linus Torvalds&lt;/a&gt;!)&lt;/p&gt;
+
+&lt;h2 id=&quot;ok-backing-up-version-controlling-and-sharing-my-code-seems-the-honorable-thing-to-do--how-do-i-get-started&quot;&gt;OK, backing-up, version controlling, and sharing my code seems the honorable thing to do.  How do I get started?&lt;/h2&gt;
+
+&lt;p&gt;Great! Here are some tutorials/resources with my comments:&lt;/p&gt;
+
+&lt;h3 id=&quot;tutorials&quot;&gt;Tutorials&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1&quot;&gt;GitHub For Beginners: Don’t Get Scared, Get Started&lt;/a&gt;. A super gentle introduction to both Git and Github from a non-programmers point of view. Includes some motivation (borrowed heavily from in the sections above), a glossary, and a tutorial on how to set up Git and GitHub &lt;strong&gt;for the first time&lt;/strong&gt;. Highly recommended.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://readwrite.com/2013/10/02/github-for-beginners-part-2&quot;&gt;GitHub For Beginners: Commit, Push And Go&lt;/a&gt;. This is the second installment to the link above. Shows you how to add new files to your repository, save versions to your local repository (commit them), and save versions to your web-based GitHub repository (push them). Again, this is a very gentle introduction.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lifehacker.com/5983680/how-the-heck-do-i-use-github&quot;&gt;How the Heck Do I Use GitHub?&lt;/a&gt;. From &lt;a href=&quot;http://www.lifehacker.com&quot;&gt;Lifehacker&lt;/a&gt;, similar to the above, only shorter.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.atlassian.com/git/tutorial&quot;&gt;Git Tutorials&lt;/a&gt;. From basics too more sophisticated help on things like changing your repositories past history (perhaps you accidently saved a password in the clear to a commit).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-resources&quot;&gt;Other Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Tru Git&lt;/a&gt;.  Read through some or all of the above, but still feeling some trepidation? No problem.  Speng 15 minutes on Try Git to get a sense of how this all works! (And Try Git’s code is hosted on … GitHub!)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.atlassian.com/git/workflows&quot;&gt;Git Workflows&lt;/a&gt;.  This is an intermediate tutorial and discussion of various Git “workflows”.  Workflows describe rules and timing around how you pull code from a repository and push it back up when you are done working on it with a group of people.  There are probably an infinite number of ways teams of developers could use to coordinate development.  These are the most common. The most important tuturial to read is the one on &lt;a href=&quot;https://www.atlassian.com/git/workflows#!workflow-feature-branch&quot;&gt;feature-branch workflows&lt;/a&gt;, since that is teh workflow we will employ for KIPP Silo.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;git - the simple guide&quot;&gt;git - the simple guide&lt;/a&gt;. An excellent cheat sheet. “no deep shit ;)”&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.atlassian.com/dms/wac/images/landing/git/atlassian_git_cheatsheet.pdf&quot;&gt;Git Cheatsheet&lt;/a&gt;. A two page pdf cheatsheet.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ndpsoftware.com/git-cheatsheet.html#loc=workspace;&quot;&gt;Interactive Git Cheatsheet&lt;/a&gt;.  It is what it says it is.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://justinhileman.info/article/git-pretty/git-pretty.png&quot;&gt;Escape a Git mess: Step-by-step&lt;/a&gt;. What it says it is, too, and somewhat tongue-in-cheek.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Feel free to let me know if you have any questions or I’ve left anything out of this round-up!&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 29 Jul 2014 01:19:13 -0500</pubDate>
+        <link>http://kippdata.github.io/***REMOVED***/2014/07/29/git-resources/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/***REMOVED***/2014/07/29/git-resources/</guid>
+        
+        
+      </item>
     
       <item>
         <title>KIPP Silo @ KSS Day 1</title>
