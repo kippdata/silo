@@ -5,9 +5,25 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 29 Jul 2014 06:20:20 -0500</pubDate>
-    <lastBuildDate>Tue, 29 Jul 2014 06:20:20 -0500</lastBuildDate>
+    <pubDate>Tue, 29 Jul 2014 10:46:35 -0500</pubDate>
+    <lastBuildDate>Tue, 29 Jul 2014 10:46:35 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>KIPP Silo @ KSS Day 2</title>
+        <description>&lt;p&gt;Today let’s try and take over the Optimism Lounge (352 A): &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Tuesday.png&quot; alt=&quot;KSS Map Day 2&quot; title=&quot;KSS Map Day 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s right across the hall from 342 B/E, where the &lt;a href=&quot;http://www.kipp.org/00/KSS2014/mobile/session-details.cfm?s=3043&quot;&gt;Technology and Data Community Kick-off&lt;/a&gt; is located.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 29 Jul 2014 05:43:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/07/29/KSS-day-two/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/29/KSS-day-two/</guid>
+        
+        
+      </item>
     
       <item>
         <title>GitHub and Git Tutorials</title>
