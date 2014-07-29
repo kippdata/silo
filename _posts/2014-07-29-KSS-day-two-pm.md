@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "KIPP Silo @ KSS Day 2"
+title:  "KIPP Silo @ KSS Day 2 Afternoon Location"
 date:   2014-07-29 14:15:00
 ---
 
