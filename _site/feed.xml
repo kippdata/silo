@@ -5,9 +5,92 @@
     <description>A ***REMOVED*** is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/***REMOVED***/</link>
     <atom:link href="http://kippdata.github.io/***REMOVED***/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 29 Jul 2014 10:46:35 -0500</pubDate>
-    <lastBuildDate>Tue, 29 Jul 2014 10:46:35 -0500</lastBuildDate>
+    <pubDate>Wed, 30 Jul 2014 10:06:50 -0500</pubDate>
+    <lastBuildDate>Wed, 30 Jul 2014 10:06:50 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>KIPP Silo @ KSS Day 3 (Morning Edition)</title>
+        <description>&lt;p&gt;It’s Wednesday.  I’m in the Grit Lounge.  There’s power though not many chairs. Come on end all.  I’ll be working on:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;spinning up an EC2 instance on AWS with Windows Server and SQL server running;&lt;/li&gt;
+  &lt;li&gt;docummenting that proces;&lt;/li&gt;
+  &lt;li&gt;setting up a persistent VPN to Pearson Hosted PowerSchool;&lt;/li&gt;
+  &lt;li&gt;documenting that process too;&lt;/li&gt;
+  &lt;li&gt;Connecting our fist KIPP Silo instance to PowerSchool and (ambitiously) Illuminte, and&lt;/li&gt;
+  &lt;li&gt;Documenting those connections.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If all goes well, I hope to have the first 3 bullets done by lunch.&lt;/p&gt;
+
+&lt;p&gt;Here’s the location of the Grit Lounge for those who don’t yet know:
+&lt;img src=&quot;/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 3 AM&quot; title=&quot;KSS Map Day 3 AM&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 30 Jul 2014 05:00:00 -0500</pubDate>
+        <link>http://kippdata.github.io/***REMOVED***/2014/07/30/KSS-day-three/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/***REMOVED***/2014/07/30/KSS-day-three/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Setting up SQL Server on AWS</title>
+        <description>&lt;h2 id=&quot;amazon-web-services&quot;&gt;Amazon Web Services&lt;/h2&gt;
+
+&lt;p&gt;First, you’ll need to go to &lt;a href=&quot;http://aws.amazon.com/&quot;&gt;Amazon Web Services&lt;/a&gt; and click on sign up:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/1-AWS_Sign_up_1.png&quot; alt=&quot;AWS Landing Page&quot; title=&quot;AWS Landing Page&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Go throught the sign up process and then you will find your self at the &lt;strong&gt;AWS Managment Console&lt;/strong&gt;. This is where you will launch an EC2 instance, which is to say am &lt;strong&gt;E&lt;/strong&gt;lastic &lt;strong&gt;C&lt;/strong&gt;ompute web server hosted and maintained by your favorite purveyour of books and dry goods. But don’t worry, they are crack experts at hosting stuff for you in &lt;em&gt;The Cloud&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;You will see a bunch of color coded  and coordinated icons for different AWS services. The second one in organge on the left says EC2.  That’s the one you want.  Click it!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2-AWS_Console_1.png&quot; alt=&quot;AWS Management Console 1&quot; title=&quot;AWS Management Console 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This brings your the &lt;strong&gt;EC2 Dasboard&lt;/strong&gt;. This is were you managage all your different EC2 instances.  If this is your fist time launching an EC2 instance, then you’ll see lots of zeros and not much of any thing else.  &lt;/p&gt;
+
+&lt;p&gt;To orient you to the console you’ll see that as of this writing KIPP Chicago has two running instances under the &lt;strong&gt;Resources&lt;/strong&gt; section.  They both support our data analysis and interactive reporting website: one instance is pretty powerful machine that we use for production and the other is the development server.  There is an IP address for each and each has its own storage.  And we have one key pair, which is how we securaly access these machines (at least the first time we do so).&lt;/p&gt;
+
+&lt;p&gt;The importand part of this screen for this step-by-step is the big blue button under the &lt;strong&gt;Create Instance&lt;/strong&gt;* section in the center panel labeled &lt;strong&gt;Launch Instance&lt;/strong&gt;.  Go ahead and click that bad boy:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/3-AWS_Launch_Instance.png&quot; alt=&quot;AWS EC2 Dashboard&quot; title=&quot;AWS EC2 Dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;im-scared-what-should-i-do&quot;&gt;I’m scared, what should I do?&lt;/h2&gt;
+&lt;p&gt;You want to select a micro instance with SLQ Server Express (Free usage tier).  &lt;/p&gt;
+
+&lt;p&gt;It’s a playground.  Fall down, get back up, no real risks. Then go below &lt;/p&gt;
+
+&lt;h2 id=&quot;ok-now-im-serious&quot;&gt;Ok now I’m serious&lt;/h2&gt;
+
+&lt;p&gt;Spin up an EC2 instance with Windows Server 2012 and SQL Server Standard&lt;br /&gt;
+Why?  Because you get &lt;strong&gt;Agent&lt;/strong&gt;, which allows you to run timed tasks (i.e, you finally get a robot to do your building).&lt;/p&gt;
+
+&lt;p&gt;Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea&lt;br /&gt;
+Microsoft Windows Server 2012 R2 Standard edition, 64-bit architecture, Microsoft SQL Server 2014 Standard edition. [English]&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 29 Jul 2014 09:15:00 -0500</pubDate>
+        <link>http://kippdata.github.io/***REMOVED***/2014/07/29/SQL-Server-on-AWS/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/***REMOVED***/2014/07/29/SQL-Server-on-AWS/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>KIPP Silo @ KSS Day 2 Afternoon Location</title>
+        <description>&lt;p&gt;We are now in the Grit Lounge (352 B, which is right next to the Optimism Lounge): &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 2 pm&quot; title=&quot;KSS Map Day 2 pm&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 29 Jul 2014 09:15:00 -0500</pubDate>
+        <link>http://kippdata.github.io/***REMOVED***/2014/07/29/KSS-day-two-pm/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/***REMOVED***/2014/07/29/KSS-day-two-pm/</guid>
+        
+        
+      </item>
     
       <item>
         <title>KIPP Silo @ KSS Day 2</title>
