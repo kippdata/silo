@@ -6,7 +6,7 @@ date:   2014-07-30 10:00:00
 
 It's Wednesday.  I'm in the Grit Lounge.  There's power though not many chairs. Come on end all.  I'll be working on:
 
-* spinning up an EC2 instance on AWS with Windows Server and SQL server running;
+* spinning up an [EC2 instance](http://aws.amazon.com/ec2/) on AWS with Windows Server and SQL Server running;
 * docummenting that proces;
 * setting up a persistent VPN to Pearson Hosted PowerSchool;
 * documenting that process too;

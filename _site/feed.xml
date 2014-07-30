@@ -5,8 +5,8 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Jul 2014 10:06:50 -0500</pubDate>
-    <lastBuildDate>Wed, 30 Jul 2014 10:06:50 -0500</lastBuildDate>
+    <pubDate>Wed, 30 Jul 2014 10:10:41 -0500</pubDate>
+    <lastBuildDate>Wed, 30 Jul 2014 10:10:41 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
@@ -14,7 +14,7 @@
         <description>&lt;p&gt;It’s Wednesday.  I’m in the Grit Lounge.  There’s power though not many chairs. Come on end all.  I’ll be working on:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;spinning up an EC2 instance on AWS with Windows Server and SQL server running;&lt;/li&gt;
+  &lt;li&gt;spinning up an &lt;a href=&quot;http://aws.amazon.com/ec2/&quot;&gt;EC2 instance&lt;/a&gt; on AWS with Windows Server and SQL Server running;&lt;/li&gt;
   &lt;li&gt;docummenting that proces;&lt;/li&gt;
   &lt;li&gt;setting up a persistent VPN to Pearson Hosted PowerSchool;&lt;/li&gt;
   &lt;li&gt;documenting that process too;&lt;/li&gt;
