@@ -1,10 +1,12 @@
 ---
 layout: post
 title:  "Setting up SQL Server on AWS"
-date:   2014-07-29 14:15:00
+date:   2014-07-30 14:15:00
 ---
 
+This is is test change to demonstrate git.
 
+This step-by-step tutorial covers the process for launching your own version of the KIPP Silo data warehouse on [Amazon Web Services](http://aws.amazon.com).  It will cover how to launch an EC2 instance with Windows Server as your operating system and SQL Server as the database that will serve as your KIPP Silo data warehouse. **Note that these instructions are good for the day they were written.  If you are reading them sometime down the road they might not accurately reflect your current state of the world/SQL Server/Windows Server/AWS/etc.**
 
 ## Amazon Web Services
 
@@ -25,6 +27,8 @@ To orient you to the console you'll see that as of this writing KIPP Chicago has
 The importand part of this screen for this step-by-step is the big blue button under the **Create Instance*** section in the center panel labeled **Launch Instance**.  Go ahead and click that bad boy:
 
 ![AWS EC2 Dashboard]({{ site.baseurl }}/images/3-AWS_Launch_Instance.png "AWS EC2 Dashboard")
+
+This is the screen where you will need to pick the [Amazon Machine Image](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard)
 
 
 
