@@ -5,15 +5,13 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Jul 2014 11:22:14 -0500</pubDate>
-    <lastBuildDate>Wed, 30 Jul 2014 11:22:14 -0500</lastBuildDate>
+    <pubDate>Wed, 30 Jul 2014 11:23:44 -0500</pubDate>
+    <lastBuildDate>Wed, 30 Jul 2014 11:23:44 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
         <title>Setting up SQL Server on AWS</title>
-        <description>&lt;p&gt;This is is test change to demonstrate git.&lt;/p&gt;
-
-&lt;p&gt;This step-by-step tutorial covers the process for launching your own version of the KIPP Silo data warehouse on &lt;a href=&quot;http://aws.amazon.com&quot;&gt;Amazon Web Services&lt;/a&gt;.  It will cover how to launch an EC2 instance with Windows Server as your operating system and SQL Server as the database that will serve as your KIPP Silo data warehouse. &lt;strong&gt;Note that these instructions are good for the day they were written.  If you are reading them sometime down the road they might not accurately reflect your current state of the world/SQL Server/Windows Server/AWS/etc.&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;This step-by-step tutorial covers the process for launching your own version of the KIPP Silo data warehouse on &lt;a href=&quot;http://aws.amazon.com&quot;&gt;Amazon Web Services&lt;/a&gt;.  It will cover how to launch an EC2 instance with Windows Server as your operating system and SQL Server as the database that will serve as your KIPP Silo data warehouse. &lt;strong&gt;Note that these instructions are good for the day they were written.  If you are reading them sometime down the road they might not accurately reflect your current state of the world/SQL Server/Windows Server/AWS/etc.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;amazon-web-services&quot;&gt;Amazon Web Services&lt;/h2&gt;
 
