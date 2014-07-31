@@ -5,9 +5,35 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Jul 2014 11:23:44 -0500</pubDate>
-    <lastBuildDate>Wed, 30 Jul 2014 11:23:44 -0500</lastBuildDate>
+    <pubDate>Thu, 31 Jul 2014 09:24:31 -0500</pubDate>
+    <lastBuildDate>Thu, 31 Jul 2014 09:24:31 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>KIPP Silo @ KSS Day 4 (AM/PM Edition)</title>
+        <description>&lt;p&gt;It’s Thursday.  I’m in the Grit Lounge again with Andrew (I’ll be in an out all AM, but Andrew will be around).  &lt;/p&gt;
+
+&lt;p&gt;In the afternoon (after 1:30) the foundation reserved a room for our use: 372 A&lt;/p&gt;
+
+&lt;p&gt;This is what I’ll be working on today&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;documenting the process to spin up an &lt;a href=&quot;http://aws.amazon.com/ec2/&quot;&gt;EC2 instance&lt;/a&gt; on AWS with Windows Server and SQL Server &lt;/li&gt;
+  &lt;li&gt;documenting how to set up a persistent VPN to Pearson Hosted PowerSchool;&lt;/li&gt;
+  &lt;li&gt;documenting how to connect our fist KIPP Silo instance to PowerSchool and (ambitiously) Illuminte&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Andrew can help folks with database and R stuff.&lt;/p&gt;
+
+&lt;p&gt;So join us!&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 31 Jul 2014 04:20:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/07/31/KSS-day-four/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/31/KSS-day-four/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Setting up SQL Server on AWS</title>
@@ -33,20 +59,28 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/3-AWS_Launch_Instance.png&quot; alt=&quot;AWS EC2 Dashboard&quot; title=&quot;AWS EC2 Dashboard&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This is the screen where you will need to pick the &lt;a href=&quot;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html&quot;&gt;Amazon Machine Image&lt;/a&gt; for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard)&lt;/p&gt;
+&lt;h3 id=&quot;choose-ami&quot;&gt;Choose AMI&lt;/h3&gt;
+&lt;p&gt;This is the screen where you will need to pick the &lt;a href=&quot;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html&quot;&gt;Amazon Machine Image&lt;/a&gt; for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard).  You’ll need to scroll down the page a bit to find the AMI you want: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/4-Choose_AMI.png&quot; alt=&quot;AWS EC2 Dashboard&quot; title=&quot;AWS EC2 Dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;choose-instance-type&quot;&gt;Choose Instance Type&lt;/h3&gt;
+
+&lt;p&gt;Here you pick your server size, configuration, and type.  The cheapest you can buy from an on-demand instance (i.e., a pay-as-you-go plan) is m3.medium that runs you $0.35.  You can drop that price seven fold to $0.05 by paying a little bit upfront ($172) for a longer committment (3-years). That’s only about $1,500 over three years (i.e., $500/year) to have your Silo data warehouse hosted in the cloud.&lt;/p&gt;
 
 &lt;h2 id=&quot;im-scared-what-should-i-do&quot;&gt;I’m scared, what should I do?&lt;/h2&gt;
 &lt;p&gt;You want to select a micro instance with SLQ Server Express (Free usage tier).  &lt;/p&gt;
 
 &lt;p&gt;It’s a playground.  Fall down, get back up, no real risks. Then go below &lt;/p&gt;
 
-&lt;h2 id=&quot;ok-now-im-serious&quot;&gt;Ok now I’m serious&lt;/h2&gt;
+&lt;h2 id=&quot;ok-so-what-do-i-loose-by-going-the-micro-instancesql-server-express-route&quot;&gt;Ok, so what do I loose by going the micro instance/SQL Server Express route?&lt;/h2&gt;
 
 &lt;p&gt;Spin up an EC2 instance with Windows Server 2012 and SQL Server Standard&lt;br /&gt;
 Why?  Because you get &lt;strong&gt;Agent&lt;/strong&gt;, which allows you to run timed tasks (i.e, you finally get a robot to do your building).&lt;/p&gt;
-
-&lt;p&gt;Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea&lt;br /&gt;
-Microsoft Windows Server 2012 R2 Standard edition, 64-bit architecture, Microsoft SQL Server 2014 Standard edition. [English]&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 30 Jul 2014 09:15:00 -0500</pubDate>

@@ -26,7 +26,21 @@ The importand part of this screen for this step-by-step is the big blue button u
 
 ![AWS EC2 Dashboard]({{ site.baseurl }}/images/3-AWS_Launch_Instance.png "AWS EC2 Dashboard")
 
-This is the screen where you will need to pick the [Amazon Machine Image](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard)
+
+### Choose AMI
+This is the screen where you will need to pick the [Amazon Machine Image](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard).  You'll need to scroll down the page a bit to find the AMI you want: 
+
+* Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea
+
+![AWS EC2 Dashboard]({{ site.baseurl }}/images/4-Choose_AMI.png "AWS EC2 Dashboard")
+
+
+### Choose Instance Type
+
+Here you pick your server size, configuration, and type.  The cheapest you can buy from an on-demand instance (i.e., a pay-as-you-go plan) is m3.medium that runs you $0.35.  You can drop that price seven fold to $0.05 by paying a little bit upfront ($172) for a longer committment (3-years). That's only about $1,500 over three years (i.e., $500/year) to have your Silo data warehouse hosted in the cloud.
+
+
+
 
 
 
@@ -36,13 +50,11 @@ You want to select a micro instance with SLQ Server Express (Free usage tier).
 
 It's a playground.  Fall down, get back up, no real risks. Then go below 
 
-## Ok now I'm serious
+## Ok, so what do I loose by going the micro instance/SQL Server Express route?
 
 Spin up an EC2 instance with Windows Server 2012 and SQL Server Standard
 Why?  Because you get **Agent**, which allows you to run timed tasks (i.e, you finally get a robot to do your building).
 
-Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea
-Microsoft Windows Server 2012 R2 Standard edition, 64-bit architecture, Microsoft SQL Server 2014 Standard edition. [English]
 
 
 
