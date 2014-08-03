@@ -5,7 +5,7 @@ description: "A ***REMOVED*** is 'a deep bin for storing material' as is KIPP Si
 baseurl: "/***REMOVED***"
 url: "http://kippdata.github.io/***REMOVED***"
 twitter_username: chrishaid
-github_username:  kippdata
+github_username:  kippdata/***REMOVED***
 gems:
   - jekyll-mentions
 # Build settings
