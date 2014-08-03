@@ -5,8 +5,8 @@
     <description>A ***REMOVED*** is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/***REMOVED***/</link>
     <atom:link href="http://kippdata.github.io/***REMOVED***/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 02 Aug 2014 21:40:24 -0500</pubDate>
-    <lastBuildDate>Sat, 02 Aug 2014 21:40:24 -0500</lastBuildDate>
+    <pubDate>Sat, 02 Aug 2014 21:49:20 -0500</pubDate>
+    <lastBuildDate>Sat, 02 Aug 2014 21:49:20 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
@@ -15,9 +15,9 @@
 
 &lt;p&gt;It will cover how to launch an EC2 instance with Windows Server as your operating system and SQL Server as the database that will serve as your KIPP Silo data warehouse. &lt;strong&gt;Note that these instructions are good for the day they were written.  If you are reading them sometime down the road they might not accurately reflect your current state of the world/SQL Server/Windows Server/AWS/etc.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Table of Contents&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
 &lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#table-of-contents&quot;&gt;Table of Contents&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#amazon-web-services&quot;&gt;Amazon Web Services&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#choose-ami&quot;&gt;Choose AMI&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#choose-instance-type&quot;&gt;Choose Instance Type&lt;/a&gt;&lt;/li&gt;

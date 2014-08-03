@@ -10,7 +10,8 @@ This step-by-step tutorial covers the process for launching your own version of 
 
 It will cover how to launch an EC2 instance with Windows Server as your operating system and SQL Server as the database that will serve as your KIPP Silo data warehouse. **Note that these instructions are good for the day they were written.  If you are reading them sometime down the road they might not accurately reflect your current state of the world/SQL Server/Windows Server/AWS/etc.**
 
-## Table of Contents
+_**Table of Contents**_
+
 * TOC
 {:toc}
 
