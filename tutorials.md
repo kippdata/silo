@@ -10,7 +10,7 @@ permalink: /tutorials/
   {% for post in site.posts %}
   	{% if post.flag == 'tutorial' %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
+      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
     </li>
     {% endif %}
   {% endfor %}
