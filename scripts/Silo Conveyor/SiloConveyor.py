@@ -4,16 +4,16 @@ import csv
 import zipfile
 from datetime import datetime
 from io import TextIOWrapper
-
 from sqlalchemy import *
+
 
 def load_config():
     """
-    Loads our configuaration file, ***REMOVED***conv.cfg, located in the same folder
+    Loads our configuration file, ***REMOVED***conv.cfg, located in the same folder
     """
     try:
         f = open('***REMOVED***conv.cfg')
-    except IOError as err:
+    except IOError:
         print('Problem opening ***REMOVED***conv.cfg!')
     else:
         with f:
@@ -21,6 +21,7 @@ def load_config():
             global config
 
             config = json.load(f)
+
 
 def db_connect():
     """
@@ -37,6 +38,7 @@ def db_connect():
     global dwconn
 
     dwconn = dwengine.connect()
+
 
 def generate_db_url():
     """
@@ -66,6 +68,7 @@ def generate_db_url():
 
     return base
 
+
 def import_map(path):
     """
     Import the AssessmentResults.csv file into map_table.
@@ -89,6 +92,7 @@ def import_map(path):
     results = convert_map_strings(results)
 
     dwconn.execute(map_table.insert(), results)    
+
 
 def check_map_table():
     """
@@ -167,10 +171,8 @@ def check_map_table():
                       Column('ProjectedProficiency', String(20)))
 
     metadata.create_all(dwengine)
-    
-'''
-Deals with the conversion of Strings from the csv into correct data types
-'''
+
+
 def convert_map_strings(results):
     """
     Handles conversion of csv Strings into correct data types
@@ -239,6 +241,7 @@ def convert_map_strings(results):
 
     return results
 
+
 def convert_to_int(string):
     """
     Converts a String to an integer. If blank returns None.
@@ -249,6 +252,7 @@ def convert_to_int(string):
         return None
     else:
         return int(string)
+
 
 def convert_to_float(string):
     """
@@ -262,10 +266,10 @@ def convert_to_float(string):
         return float(string)
     
 #Commandline arguments setup
-desc = 'Manage the import of data into the data warehouse.'
+desc = 'Manage the import of data into the KIPP Silo data warehouse.'
 parser = argparse.ArgumentParser(description=desc)
 
-parser.add_argument('-m', '--map', help='import the MAP Comprehensive Data File')
+parser.add_argument('-m', '--map', help='Import the MAP Comprehensive Data File')
 
 args = parser.parse_args()
 
