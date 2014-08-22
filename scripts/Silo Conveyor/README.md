@@ -4,12 +4,13 @@ The KIPP Silo Conveyor is a single, all-purpose application designed to allow ea
 
 ##Required Dependencies
 
-###sqlalchemy
+####sqlalchemy
 
 ##Optional Dependencies
 
-###cx_Oracle
+####cx_Oracle
 - PowerSchool Integration
 - Oracle Server Data Warehouse
-###pyodbc
+
+####pyodbc
 - SQL Server Data Warehouse
