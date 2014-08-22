@@ -1,3 +1,4 @@
+import sys
 import argparse
 import json
 import csv
@@ -15,6 +16,7 @@ def load_config():
         f = open('***REMOVED***conv.cfg')
     except IOError:
         print('Problem opening ***REMOVED***conv.cfg!')
+        sys.exit()
     else:
         with f:
             #Global variable config to be used in other parts
@@ -91,6 +93,10 @@ def import_map(path):
 
     results = convert_map_strings(results)
 
+    term = results[0]['TermName']
+
+    dwconn.execute(map_table.delete().where(map_table.c.TermName == term))
+
     dwconn.execute(map_table.insert(), results)    
 
 
@@ -119,10 +125,10 @@ def check_map_table():
                       Column('TestRITScore', Integer()),
                       Column('TestStandardError', Float()),
                       Column('TestPercentile', Integer()),
-                      Column('TypicalFallToFallGrowth', Integer()),
-                      Column('TypicalSpringToSpringGrowth', Integer()),
-                      Column('TypicalFallToSpringGrowth', Integer()),
-                      Column('TypicalFallToWinterGrowth', Integer()),
+                      Column('TypicalFallToFallGrowth', Float()),
+                      Column('TypicalSpringToSpringGrowth', Float()),
+                      Column('TypicalFallToSpringGrowth', Float()),
+                      Column('TypicalFallToWinterGrowth', Float()),
                       Column('RITtoReadingScore', String(10)),
                       Column('RITtoReadingMin', String(10)),
                       Column('RITtoReadingMax', String(10)),
@@ -194,13 +200,13 @@ def convert_map_strings(results):
         result['TestStandardError'] = convert_to_float(
             result['TestStandardError'])
         result['TestPercentile'] = convert_to_int(result['TestPercentile'])
-        result['TypicalFallToFallGrowth'] = convert_to_int(
+        result['TypicalFallToFallGrowth'] = convert_to_float(
             result['TypicalFallToFallGrowth'])
-        result['TypicalSpringToSpringGrowth'] = convert_to_int(
+        result['TypicalSpringToSpringGrowth'] = convert_to_float(
             result['TypicalSpringToSpringGrowth'])
-        result['TypicalFallToSpringGrowth'] = convert_to_int(
+        result['TypicalFallToSpringGrowth'] = convert_to_float(
             result['TypicalFallToSpringGrowth'])
-        result['TypicalFallToWinterGrowth'] = convert_to_int(
+        result['TypicalFallToWinterGrowth'] = convert_to_float(
             result['TypicalFallToWinterGrowth'])
         result['Goal1RitScore'] = convert_to_int(
             result['Goal1RitScore'])
@@ -283,3 +289,4 @@ if args.map:
         import_map(args.map)
     except FileNotFoundError:
         print('File %s not found' % args.map)
+        sys.exit()
