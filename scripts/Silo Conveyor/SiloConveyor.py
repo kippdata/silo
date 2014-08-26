@@ -35,11 +35,17 @@ def db_connect():
 
     eng_conn_string = generate_db_url()
     
-    dwengine = create_engine(eng_conn_string, echo=True)
+    dwengine = create_engine(eng_conn_string, echo=False)
 
     global dwconn
 
     dwconn = dwengine.connect()
+
+    global dwmeta
+
+    dwmeta = MetaData()
+
+    dwmeta.reflect(bind=dwengine)
 
 
 def generate_db_url():
@@ -97,7 +103,7 @@ def import_map(path):
 
     dwconn.execute(map_table.delete().where(map_table.c.TermName == term))
 
-    dwconn.execute(map_table.insert(), results)    
+    dwconn.execute(map_table.insert(), results)
 
 
 def check_map_table():
@@ -105,11 +111,13 @@ def check_map_table():
     Checks that the map_table exists in the data warehouse.
     If not, create it.
     """
-    metadata = MetaData()
-
     global map_table
 
-    map_table = Table('map_table', metadata,
+    if 'map_table' in dwmeta.tables.keys():
+        map_table = Table('map_table', dwmeta, autoload=True)
+        return
+
+    map_table = Table('map_table', dwmeta,
                       Column('id', Integer, primary_key=True),
                       Column('TermName', String(20)),
                       Column('StudentID', Integer()),
@@ -176,7 +184,7 @@ def check_map_table():
                       Column('PercentCorrect', Integer()),
                       Column('ProjectedProficiency', String(20)))
 
-    metadata.create_all(dwengine)
+    dwmeta.create_all(dwengine)
 
 
 def convert_map_strings(results):
