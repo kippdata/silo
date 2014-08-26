@@ -49,24 +49,24 @@ def generate_db_url():
     """
     base = ''
 
-    base += config['server-dialect']
+    base += config['server-config']['server-dialect']
 
-    if config['server-driver'] != '':
-        base += '+' + config['server-driver']
+    if config['server-config']['server-driver'] != '':
+        base += '+' + config['server-config']['server-driver']
 
     base += '://'
 
-    if config['server-username'] != '' and config['server-password'] != '':
-        base += config['server-username'] + ':' + config['server-password']
+    if config['server-config']['server-username'] != '' and config['server-config']['server-password'] != '':
+        base += config['server-config']['server-username'] + ':' + config['server-config']['server-password']
 
-    if config['server-host'] != '':
-        base += '@' + config['server-host']
+    if config['server-config']['server-host'] != '':
+        base += '@' + config['server-config']['server-host']
 
-    if config['server-port'] != '':
-        base += ':' + config['server-port']
+    if config['server-config']['server-port'] != '':
+        base += ':' + config['server-config']['server-port']
 
-    if config['server-database'] != '':
-        base += '/' + config['server-database']
+    if config['server-config']['server-database'] != '':
+        base += '/' + config['server-config']['server-database']
 
     return base
 
@@ -248,6 +248,19 @@ def convert_map_strings(results):
     return results
 
 
+def import_powerschool():
+    psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
+                             (config['powerschool-config']['username'],
+                              config['powerschool-config']['password'],
+                              config['powerschool-config']['host']))
+
+    psmeta = MetaData()
+
+    students = Table('students', psmeta, autoload=True, autoload_with=psengine, schema='ps')
+
+    print(students)
+
+
 def convert_to_int(string):
     """
     Converts a String to an integer. If blank returns None.
@@ -276,6 +289,7 @@ desc = 'Manage the import of data into the KIPP Silo data warehouse.'
 parser = argparse.ArgumentParser(description=desc)
 
 parser.add_argument('-m', '--map', help='Import the MAP Comprehensive Data File')
+parser.add_argument('-P', '--powerschool', help='Import PowerSchool tables', action='store_true')
 
 args = parser.parse_args()
 
@@ -289,4 +303,11 @@ if args.map:
         import_map(args.map)
     except FileNotFoundError:
         print('File %s not found' % args.map)
+        sys.exit()
+
+if args.powerschool:
+    try:
+        import_powerschool()
+    except:
+        print('Problem with PowerSchool Import')
         sys.exit()
