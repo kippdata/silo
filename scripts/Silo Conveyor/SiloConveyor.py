@@ -113,78 +113,78 @@ def check_map_table():
     """
     global map_table
 
-    if 'map_table' in dwmeta.tables.keys():
-        map_table = Table('map_table', dwmeta, autoload=True)
-        return
+    map_table = table_exists('map_table')
 
-    map_table = Table('map_table', dwmeta,
-                      Column('id', Integer, primary_key=True),
-                      Column('TermName', String(20)),
-                      Column('StudentID', Integer()),
-                      Column('SchoolName', String(50)),
-                      Column('MeasurementScale', String(20)),
-                      Column('Discipline', String(20)),
-                      Column('GrowthMeasureYN', Boolean()),
-                      Column('TestType', String(20)),
-                      Column('TestName', String(50)),
-                      Column('TestID', BigInteger()),
-                      Column('TestStartDate', Date()),
-                      Column('TestDurationMinutes', Integer()),
-                      Column('TestRITScore', Integer()),
-                      Column('TestStandardError', Float()),
-                      Column('TestPercentile', Integer()),
-                      Column('TypicalFallToFallGrowth', Float()),
-                      Column('TypicalSpringToSpringGrowth', Float()),
-                      Column('TypicalFallToSpringGrowth', Float()),
-                      Column('TypicalFallToWinterGrowth', Float()),
-                      Column('RITtoReadingScore', String(10)),
-                      Column('RITtoReadingMin', String(10)),
-                      Column('RITtoReadingMax', String(10)),
-                      Column('Goal1Name', String(50)),
-                      Column('Goal1RitScore', Integer()),
-                      Column('Goal1StdErr', Float()),
-                      Column('Goal1Range', String(10)),
-                      Column('Goal2Adjective', String(10)),
-                      Column('Goal2Name', String(50)),
-                      Column('Goal2RitScore', Integer()),
-                      Column('Goal2StdErr', Float()),
-                      Column('Goal2Range', String(10)),
-                      Column('Goal2Adjective', String(10)),
-                      Column('Goal3Name', String(50)),
-                      Column('Goal3RitScore', Integer()),
-                      Column('Goal3StdErr', Float()),
-                      Column('Goal3Range', String(10)),
-                      Column('Goal3Adjective', String(10)),
-                      Column('Goal4Name', String(50)),
-                      Column('Goal4RitScore', Integer()),
-                      Column('Goal4StdErr', Float()),
-                      Column('Goal4Range', String(10)),
-                      Column('Goal4Adjective', String(10)),
-                      Column('Goal5Name', String(50)),
-                      Column('Goal5RitScore', Integer()),
-                      Column('Goal5StdErr', Float()),
-                      Column('Goal5Range', String(10)),
-                      Column('Goal5Adjective', String(10)),
-                      Column('Goal6Name', String(50)),
-                      Column('Goal6RitScore', Integer()),
-                      Column('Goal6StdErr', Float()),
-                      Column('Goal6Range', String(10)),
-                      Column('Goal6Adjective', String(10)),
-                      Column('Goal7Name', String(50)),
-                      Column('Goal7RitScore', Integer()),
-                      Column('Goal7StdErr', Float()),
-                      Column('Goal7Range', String(10)),
-                      Column('Goal7Adjective', String(10)),
-                      Column('Goal8Name', String(50)),
-                      Column('Goal8RitScore', Integer()),
-                      Column('Goal8StdErr', Float()),
-                      Column('Goal8Range', String(10)),
-                      Column('Goal8Adjective', String(10)),
-                      Column('TestStartTime', Time()),
-                      Column('PercentCorrect', Integer()),
-                      Column('ProjectedProficiency', String(20)))
+    if not map_table:
 
-    dwmeta.create_all(dwengine)
+        map_table = Table('map_table', dwmeta,
+                          Column('id', Integer, primary_key=True),
+                          Column('TermName', String(20)),
+                          Column('StudentID', Integer()),
+                          Column('SchoolName', String(50)),
+                          Column('MeasurementScale', String(20)),
+                          Column('Discipline', String(20)),
+                          Column('GrowthMeasureYN', Boolean()),
+                          Column('TestType', String(20)),
+                          Column('TestName', String(50)),
+                          Column('TestID', BigInteger()),
+                          Column('TestStartDate', Date()),
+                          Column('TestDurationMinutes', Integer()),
+                          Column('TestRITScore', Integer()),
+                          Column('TestStandardError', Float()),
+                          Column('TestPercentile', Integer()),
+                          Column('TypicalFallToFallGrowth', Float()),
+                          Column('TypicalSpringToSpringGrowth', Float()),
+                          Column('TypicalFallToSpringGrowth', Float()),
+                          Column('TypicalFallToWinterGrowth', Float()),
+                          Column('RITtoReadingScore', String(10)),
+                          Column('RITtoReadingMin', String(10)),
+                          Column('RITtoReadingMax', String(10)),
+                          Column('Goal1Name', String(50)),
+                          Column('Goal1RitScore', Integer()),
+                          Column('Goal1StdErr', Float()),
+                          Column('Goal1Range', String(10)),
+                          Column('Goal2Adjective', String(10)),
+                          Column('Goal2Name', String(50)),
+                          Column('Goal2RitScore', Integer()),
+                          Column('Goal2StdErr', Float()),
+                          Column('Goal2Range', String(10)),
+                          Column('Goal2Adjective', String(10)),
+                          Column('Goal3Name', String(50)),
+                          Column('Goal3RitScore', Integer()),
+                          Column('Goal3StdErr', Float()),
+                          Column('Goal3Range', String(10)),
+                          Column('Goal3Adjective', String(10)),
+                          Column('Goal4Name', String(50)),
+                          Column('Goal4RitScore', Integer()),
+                          Column('Goal4StdErr', Float()),
+                          Column('Goal4Range', String(10)),
+                          Column('Goal4Adjective', String(10)),
+                          Column('Goal5Name', String(50)),
+                          Column('Goal5RitScore', Integer()),
+                          Column('Goal5StdErr', Float()),
+                          Column('Goal5Range', String(10)),
+                          Column('Goal5Adjective', String(10)),
+                          Column('Goal6Name', String(50)),
+                          Column('Goal6RitScore', Integer()),
+                          Column('Goal6StdErr', Float()),
+                          Column('Goal6Range', String(10)),
+                          Column('Goal6Adjective', String(10)),
+                          Column('Goal7Name', String(50)),
+                          Column('Goal7RitScore', Integer()),
+                          Column('Goal7StdErr', Float()),
+                          Column('Goal7Range', String(10)),
+                          Column('Goal7Adjective', String(10)),
+                          Column('Goal8Name', String(50)),
+                          Column('Goal8RitScore', Integer()),
+                          Column('Goal8StdErr', Float()),
+                          Column('Goal8Range', String(10)),
+                          Column('Goal8Adjective', String(10)),
+                          Column('TestStartTime', Time()),
+                          Column('PercentCorrect', Integer()),
+                          Column('ProjectedProficiency', String(20)))
+
+        dwmeta.create_all(dwengine)
 
 
 def convert_map_strings(results):
@@ -257,16 +257,38 @@ def convert_map_strings(results):
 
 
 def import_raw_powerschool():
-    psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
-                             (config['powerschool-config']['username'],
-                              config['powerschool-config']['password'],
-                              config['powerschool-config']['host']))
+    #psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
+    #                         (config['powerschool-config']['username'],
+    #                          config['powerschool-config']['password'],
+    #                          config['powerschool-config']['host']))
 
-    psmeta = MetaData()
+    #psmeta = MetaData()
 
-    students = Table('students', psmeta, autoload=True, autoload_with=psengine, schema='ps')
+    #students = Table('students', psmeta, autoload=True, autoload_with=psengine, schema='ps')
 
-    print(students)
+    pass
+
+    #TODO Research and potentially implement Alembic module for raw data migration
+
+
+def table_exists(table):
+    """
+    Check if a table already exists the the target data warehouse. If so return the table. Else return None.
+    None to be used in if statements to see if table was loaded. For example:
+
+    table = table_exists('table')
+    if not table:
+        #Generate table code
+
+    :param table: Name of the table to check for
+    :return:
+    """
+    if table in dwmeta.tables.keys():
+        print('%s exists.' % table)
+        return Table(table, dwmeta, autoload=True)
+    else:
+        print('%s does not exist.' % table)
+        return None
 
 
 def convert_to_int(string):
@@ -313,9 +335,10 @@ if args.map:
         print('File %s not found' % args.map)
         sys.exit()
 
-if args.powerschool:
+if args.powerschoolraw:
     try:
         import_raw_powerschool()
-    except:
+    except Exception as e:
         print('Problem with Raw PowerSchool Import')
+        print(e)
         sys.exit()
