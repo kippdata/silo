@@ -256,7 +256,7 @@ def convert_map_strings(results):
     return results
 
 
-def import_powerschool():
+def import_raw_powerschool():
     psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
                              (config['powerschool-config']['username'],
                               config['powerschool-config']['password'],
@@ -297,7 +297,7 @@ desc = 'Manage the import of data into the KIPP Silo data warehouse.'
 parser = argparse.ArgumentParser(description=desc)
 
 parser.add_argument('-m', '--map', help='Import the MAP Comprehensive Data File')
-parser.add_argument('-P', '--powerschool', help='Import PowerSchool tables', action='store_true')
+parser.add_argument('-P', '--powerschoolraw', help='Import Raw PowerSchool tables', action='store_true')
 
 args = parser.parse_args()
 
@@ -315,7 +315,7 @@ if args.map:
 
 if args.powerschool:
     try:
-        import_powerschool()
+        import_raw_powerschool()
     except:
-        print('Problem with PowerSchool Import')
+        print('Problem with Raw PowerSchool Import')
         sys.exit()
