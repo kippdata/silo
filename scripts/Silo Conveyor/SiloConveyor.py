@@ -1,6 +1,6 @@
 import sys
 import argparse
-import json
+import configparser
 import csv
 import zipfile
 from datetime import datetime
@@ -12,17 +12,13 @@ def load_config():
     """
     Loads our configuration file, ***REMOVED***conv.cfg, located in the same folder
     """
-    try:
-        f = open('***REMOVED***conv.cfg')
-    except IOError:
-        print('Problem opening ***REMOVED***conv.cfg!')
-        sys.exit()
-    else:
-        with f:
-            #Global variable config to be used in other parts
-            global config
 
-            config = json.load(f)
+    speak('Loading Configuration File.')
+
+    global config
+
+    config = configparser.ConfigParser()
+    config.read('***REMOVED***conv.cfg')
 
 
 def db_connect():
@@ -30,12 +26,14 @@ def db_connect():
     Connects to our data warehouse to run needed processes.
     """
 
+    speak('Connecting to data warehouse.')
+
     #Start our sqlalchemy engine.
     global dwengine
 
     eng_conn_string = generate_db_url()
     
-    dwengine = create_engine(eng_conn_string, echo=False)
+    dwengine = create_engine(eng_conn_string, echo=args.Verbose)
 
     global dwconn
 
@@ -53,26 +51,29 @@ def generate_db_url():
     Generates the sqlalchemy database url, dependant on setting in ***REMOVED***conv.cfg
     :return:String of database url
     """
+
+    speak('Generating data warehouse url.')
+
     base = ''
 
-    base += config['server-config']['server-dialect']
+    base += config['dwserver']['dialect']
 
-    if config['server-config']['server-driver'] != '':
-        base += '+' + config['server-config']['server-driver']
+    if config['dwserver']['driver'] != '':
+        base += '+' + config['dwserver']['driver']
 
     base += '://'
 
-    if config['server-config']['server-username'] != '' and config['server-config']['server-password'] != '':
-        base += config['server-config']['server-username'] + ':' + config['server-config']['server-password']
+    if config['dwserver']['username'] != '' and config['dwserver']['password'] != '':
+        base += config['dwserver']['username'] + ':' + config['dwserver']['password']
 
-    if config['server-config']['server-host'] != '':
-        base += '@' + config['server-config']['server-host']
+    if config['dwserver']['host'] != '':
+        base += '@' + config['dwserver']['host']
 
-    if config['server-config']['server-port'] != '':
-        base += ':' + config['server-config']['server-port']
+    if config['dwserver']['port'] != '':
+        base += ':' + config['dwserver']['port']
 
-    if config['server-config']['server-database'] != '':
-        base += '/' + config['server-config']['server-database']
+    if config['dwserver']['database'] != '':
+        base += '/' + config['dwserver']['database']
 
     return base
 
@@ -82,6 +83,9 @@ def import_map(path):
     Import the AssessmentResults.csv file into map_table.
     :param path: Path location of the file to import.
     """
+
+    speak('Loading MAP File.')
+
     file_ext = path[-3:]
     if file_ext.lower() == 'zip':
         with zipfile.ZipFile(path) as mapzip:
@@ -95,14 +99,18 @@ def import_map(path):
         with open(path) as file:
             results = list(csv.DictReader(file))
 
+    speak('Checking MAP Table.')
+
     check_map_table()
 
     results = convert_map_strings(results)
 
     term = results[0]['TermName']
 
+    speak('Clearing old term data if exists.')
     dwconn.execute(map_table.delete().where(map_table.c.TermName == term))
 
+    speak('Importing MAP data.')
     dwconn.execute(map_table.insert(), results)
 
 
@@ -115,7 +123,7 @@ def check_map_table():
 
     map_table = table_exists('map_table')
 
-    if not map_table:
+    if map_table is None:
 
         map_table = Table('map_table', dwmeta,
                           Column('id', Integer, primary_key=True),
@@ -258,9 +266,9 @@ def convert_map_strings(results):
 
 def import_raw_powerschool():
     #psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
-    #                         (config['powerschool-config']['username'],
-    #                          config['powerschool-config']['password'],
-    #                          config['powerschool-config']['host']))
+    #                         (config['powerschool']['username'],
+    #                          config['powerschool']['password'],
+    #                          config['powerschool']['host']))
 
     #psmeta = MetaData()
 
@@ -271,23 +279,33 @@ def import_raw_powerschool():
     #TODO Research and potentially implement Alembic module for raw data migration
 
 
+def speak(message):
+    """
+    If verbose is turned on, print message to console.
+    :param message: Message to be printed
+    :return:
+    """
+    if args.verbose or args.Verbose:
+        print(message)
+
+
 def table_exists(table):
     """
     Check if a table already exists the the target data warehouse. If so return the table. Else return None.
     None to be used in if statements to see if table was loaded. For example:
 
     table = table_exists('table')
-    if not table:
+    if table is None:
         #Generate table code
 
     :param table: Name of the table to check for
     :return:
     """
     if table in dwmeta.tables.keys():
-        print('%s exists.' % table)
+        speak('%s exists.' % table)
         return Table(table, dwmeta, autoload=True)
     else:
-        print('%s does not exist.' % table)
+        speak('%s does not exist.' % table)
         return None
 
 
@@ -318,8 +336,10 @@ def convert_to_float(string):
 desc = 'Manage the import of data into the KIPP Silo data warehouse.'
 parser = argparse.ArgumentParser(description=desc)
 
+parser.add_argument('-v', '--verbose', help='Verbose Console Output', action='store_true')
+parser.add_argument('-V', '--Verbose', help='Verbose Console Output and SQLAlchemy Output', action='store_true')
 parser.add_argument('-m', '--map', help='Import the MAP Comprehensive Data File')
-parser.add_argument('-P', '--powerschoolraw', help='Import Raw PowerSchool tables', action='store_true')
+#parser.add_argument('-P', '--powerschoolraw', help='Import Raw PowerSchool tables', action='store_true')
 
 args = parser.parse_args()
 
@@ -335,10 +355,10 @@ if args.map:
         print('File %s not found' % args.map)
         sys.exit()
 
-if args.powerschoolraw:
-    try:
-        import_raw_powerschool()
-    except Exception as e:
-        print('Problem with Raw PowerSchool Import')
-        print(e)
-        sys.exit()
+# if args.powerschoolraw:
+#     try:
+#         import_raw_powerschool()
+#     except Exception as e:
+#         print('Problem with Raw PowerSchool Import')
+#         print(e)
+#         sys.exit()
