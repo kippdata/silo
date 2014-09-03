@@ -279,6 +279,76 @@ def import_raw_powerschool():
     #TODO Research and potentially implement Alembic module for raw data migration
 
 
+def import_powerschool(fields):
+    """
+    Import predesignated fields from PowerSchool into KIPP Silo
+    :param fields: List of strings of fieldnames to import
+    :return:
+    """
+
+    speak('Connecting to PowerSchool.')
+
+    psengine = create_engine('oracle://%s:%s@%s/PSPRODDB' %
+                            (config['powerschool']['username'],
+                             config['powerschool']['password'],
+                             config['powerschool']['host']))
+
+    psmeta = MetaData()
+
+    students = Table('students', psmeta, autoload=True, autoload_with=psengine, schema='ps')
+
+    columns = [c for c in students.columns if c.name.lower() in fields]
+
+    speak('Importing fields %s' % columns)
+
+    s = select(columns)
+
+    results = psengine.execute(s)
+
+    results_list = [dict(row) for row in results]
+
+    ps_students_table = create_table(results_list[0])
+
+    dwmeta.create_all(bind=dwengine)
+
+    speak('Clearing old PowerSchool data if exists.')
+    dwconn.execute(ps_students_table.delete())
+
+    speak('Importing PowerSchool data.')
+    dwconn.execute(ps_students_table.insert(), results_list)
+
+
+def create_table(data):
+    """
+    Dynamically creates a SQLAlchemy table based on data types in list of dictionary.
+    :param data:
+    :return:
+    """
+    # for field in data:
+    #     print(get_column_type(type(data[field])))
+
+    columns = [Column(field, get_column_type(type(data[field]))) for field in data]
+
+    return Table('ps_students_table', dwmeta, *columns)
+
+
+def get_column_type(data_type):
+    """
+    Returns a SQLAlchemy Column Type based on data type
+    :param data_type: data_type of data
+    :return: SQLAlchemy column type
+    """
+
+    if data_type is str:
+        return String()
+    elif data_type is float:
+        return Float()
+    elif data_type is int:
+        return Integer()
+    elif data_type is datetime:
+        return Date()
+
+
 def speak(message):
     """
     If verbose is turned on, print message to console.
@@ -340,6 +410,7 @@ parser.add_argument('-v', '--verbose', help='Verbose Console Output', action='st
 parser.add_argument('-V', '--Verbose', help='Verbose Console Output and SQLAlchemy Output', action='store_true')
 parser.add_argument('-m', '--map', help='Import the MAP Comprehensive Data File')
 #parser.add_argument('-P', '--powerschoolraw', help='Import Raw PowerSchool tables', action='store_true')
+parser.add_argument('-p', '--powerschool', help='Import PowerSchool fields', action='store_true')
 
 args = parser.parse_args()
 
@@ -362,3 +433,10 @@ if args.map:
 #         print('Problem with Raw PowerSchool Import')
 #         print(e)
 #         sys.exit()
+
+if args.powerschool:
+    try:
+        fields = [x.strip().lower() for x in config['powerschool']['fields'].split(',')]
+        import_powerschool(fields)
+    except Exception as e:
+        print(e)
