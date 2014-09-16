@@ -38,8 +38,8 @@ So back to setting up For example, the first thing I did was fire up IE so I cou
 	* [RStudio](http://www.rstudio.com/products/rstudio/download/): this is an excellent IDE for R. 
 
 
-## Get F5 Big-IP  Client
-If you have a PowerSource account with Pearson you get it by searching for [artilce #70601](https://powersource.pearsonschoolsystems.com/article/70601?from=search):
+## Get F5 Big-IP Ege Client
+If you have a PowerSource account with Pearson you get it by searching for [article #70601](https://powersource.pearsonschoolsystems.com/article/70601?from=search):
 
 ![F5 Big-IP Edge Client via PowerSource]({{ site.baseurl }}/images/F5_Big_IP_client.png "F5 Big-IP")
 
