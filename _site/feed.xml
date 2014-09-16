@@ -5,9 +5,214 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 02 Aug 2014 22:34:31 -0500</pubDate>
-    <lastBuildDate>Sat, 02 Aug 2014 22:34:31 -0500</lastBuildDate>
+    <pubDate>Tue, 16 Sep 2014 13:43:31 -0500</pubDate>
+    <lastBuildDate>Tue, 16 Sep 2014 13:43:31 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
+    
+      <item>
+        <title>Linking PowerSchool to SQL Server</title>
+        <description>&lt;p&gt;This rather longish document outlines a couple of important steps in configuring your KIPP Silo instance. It is primarly aimed at setting up a linked server (specifically PowerSchools Oracle back-end) on MS SQL Server.  It also covers in passing &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;how to connect to your EC2 instance;&lt;/li&gt;
+  &lt;li&gt;setting up a VPN for Person-hosted PowerSchool&lt;/li&gt;
+  &lt;li&gt;creating a new database in SQL Server&lt;/li&gt;
+  &lt;li&gt;createing a new user in SQL Server and allowing that user access to a database.&lt;/li&gt;
+  &lt;li&gt;Allowing local access to your database.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer: These direction are long and I hope detailed enough to get anyone through this process in about 30 mins. However, I am not a DBA and there’s a better than likely chance that I’ve neglected to include a step.  Try going through them.  Let me know where you have trouble and I’ll update this doc!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#pre-reqs&quot;&gt;Pre-reqs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-f5-big-ip--client&quot;&gt;Get F5 Big-IP  Client&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-java&quot;&gt;Get Java&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-oracle-client-software&quot;&gt;Get Oracle Client software&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-kipp-silo-database&quot;&gt;Create KIPP Silo Database&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#create-the-db&quot;&gt;Create the DB&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#create-a-database-user&quot;&gt;Create a database user&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#link-to-powerschool&quot;&gt;Link to PowerSchool&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#provider-options-gui-approach&quot;&gt;Provider options: GUI Approach&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#provider-options-stored-procedure-approach&quot;&gt;Provider options: Stored Procedure Approach&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#actually-linking-the-server&quot;&gt;Actually Linking the Server&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#accessing-your-sql-server-instance-and-linked-databases-like-powerschool-from-outside-of-sql-server-management-studio&quot;&gt;Accessing your SQL Server Instance (and linked databases like PowerSchool) from outside of SQL Server Management Studio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;pre-reqs&quot;&gt;Pre-reqs&lt;/h2&gt;
+&lt;p&gt;Once you’ve logged into your Windows Server Desktop, you might want to get some other software you are already likely using. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Wait!&lt;/strong&gt;  You haven’t connected to your AWS EC2 Windows Server 2012 server yet?  AWS makes it easy: login to AWS, navigate to your EC2 instances, check your KIPP Silo instance and then click the &lt;strong&gt;Connect&lt;/strong&gt; button at the top of the page. &lt;/p&gt;
+
+&lt;p&gt;So back to setting up For example, the first thing I did was fire up IE so I could go and get Chrome.  Once I installed and launched Chrome, I signed in with my google credentials, which caused all of my bookmarks, extensions, and history to populate my new copy of Chrome.  And here’s some links to some other software that I like to use that:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Text Editors (you will need something like this)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.sublimetext.com/2&quot;&gt;Sublime Text 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.lighttable.com/&quot;&gt;LightTable&lt;/a&gt;: This is pretty cool text editor that allows for line-by-line evalation of code in scripts. It’s pretty bleeding-edge so YMMV. &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Programming languages and Integrated Development Environments
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.python.org/download/releases/2.7.8/&quot;&gt;Python 2.7.8&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.python.org/download/releases/2.7.8/&quot;&gt;R&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.rstudio.com/products/rstudio/download/&quot;&gt;RStudio&lt;/a&gt;: this is an excellent IDE for R. &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;get-f5-big-ip--client&quot;&gt;Get F5 Big-IP  Client&lt;/h2&gt;
+&lt;p&gt;If you have a PowerSource account with Pearson you get it by searching for &lt;a href=&quot;https://powersource.pearsonschoolsystems.com/article/70601?from=search&quot;&gt;artilce #70601&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/F5_Big_IP_client.png&quot; alt=&quot;F5 Big-IP Edge Client via PowerSource&quot; title=&quot;F5 Big-IP&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You definitely need the F5 VPN client if your PowerSchool instance is Pearson-hosted. You’ll need to use your VPN credentials, which you can get from Pearson by calling support if you don’t know what it is. If you use another provider for hosting or self-host your PowerSchool instance then you’ll want to talk to your IT staff.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-java&quot;&gt;Get Java&lt;/h2&gt;
+
+&lt;p&gt;Use the &lt;a href=&quot;http://java.com/en/download/installed.jsp&quot;&gt;Verify Java page&lt;/a&gt; to install the lastest version of Java. &lt;/p&gt;
+
+&lt;p&gt;You’ll also need a Java Developer Kit (JDK).  You get that here!&lt;/p&gt;
+
+&lt;h2 id=&quot;get-oracle-client-software&quot;&gt;Get Oracle Client software&lt;/h2&gt;
+
+&lt;p&gt;You needd to install the correct Oracle drivers.  You want the latest version of the Oracle Data Access Components (ODAC), and you want the XCopy deployment.  They are available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.oracle.com/technetwork/database/windows/downloads/index-090165.html&quot;&gt;64-bit Oracle Data Access Components (ODAC) Downloads&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you download and unzip this into a folder, you need to run the following command from a terminal emulator (like PowerShell) in that folder:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Administrators&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Downloads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ODAC121010Xcopy_x64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;.\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bat&lt;/span&gt; 
+	&lt;span class=&quot;n&quot;&gt;oledb&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oracle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odac64&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;odac64&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you need to add two folders to your system path (&lt;a href=&quot;http://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/&quot;&gt;here’s how you do this&lt;/a&gt;): &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oracle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odac64&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oracle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odac64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next you need to &lt;strong&gt;reboot your system&lt;/strong&gt;.  Click the &lt;strong&gt;Start&lt;/strong&gt; button in the lower left hand corner of you screen (it looks like an abstract 4-pane window viewed at an angle), which brings up the “Start page”. Click on the power icon in the upper right hand corner of the screen.  Select &lt;strong&gt;Restart&lt;/strong&gt;.  Twiddle you thumbs. &lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;create-kipp-silo-database&quot;&gt;Create KIPP Silo Database&lt;/h2&gt;
+
+&lt;h3 id=&quot;create-the-db&quot;&gt;Create the DB&lt;/h3&gt;
+&lt;p&gt;Open up Microsoft SQL Server Management Studio.  Creating a new database is really super simple. Right click on &lt;strong&gt;Databases&lt;/strong&gt; in the left-hand navigation pane and select “New Database…”:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new_database_1.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now give it a name (KIPP_Silo, perhaps?) and click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new_database_2.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 2&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;create-a-database-user&quot;&gt;Create a database user&lt;/h3&gt;
+&lt;p&gt;In order to link to your own SQL Server instance from outside of SQL Server Management Studio (i.e., from a R or Python script that manages your ST Math roster or something), you’ll need to create a user and assign that user to a database:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_0.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now give the new user a name (say, “silo”), click the radio button for &lt;strong&gt;SQL Server authentication&lt;/strong&gt; and give that user a password. &lt;/p&gt;
+
+&lt;p&gt;Uncheck the “Enforce password experiration”. &lt;/p&gt;
+
+&lt;p&gt;Select “KIPP_Silo” (or whatever you named the DB above) in the Default Database dropdown.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_1.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;strong&gt;User Mapping&lt;/strong&gt;* under &lt;strong&gt;Select a page&lt;/strong&gt;.  Click the checkbox next to ‘KIPP_Silo’ and ensure that the checkboxes next to db_datawriter, db_datareader, and public are checked.  Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_2.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 2&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;link-to-powerschool&quot;&gt;Link to PowerSchool&lt;/h2&gt;
+
+&lt;p&gt;Ok. Now you need to set some parameters for the linked server provider (i.e., the software you downloaded from Oracle above that manages the connection to Oracle database that is the backbone of your PowerSchool instance).&lt;/p&gt;
+
+&lt;p&gt;You first must configure the Oracle OleDB provider (ORAOLEDB.Oracle) to run inside the SQL Server process and then configure it to accept parameters. There are two ways to do this: one with the SQL Server Management Studio GUI interface and another by firing off some stored procedures.  You need only to done of these approaches&lt;/p&gt;
+
+&lt;h3 id=&quot;provider-options-gui-approach&quot;&gt;Provider options: GUI Approach&lt;/h3&gt;
+&lt;p&gt;It’s pretty straighforward to use the GUI.  In Management Studio’s left-hand navigation pane expand &lt;strong&gt;Server Objects&lt;/strong&gt;, then expand &lt;strong&gt;Linked Servers&lt;/strong&gt;, and then expand &lt;strong&gt;Providers&lt;/strong&gt;.  Right click on &lt;strong&gt;ORAOLEDB.Oracle&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable &lt;strong&gt;Dynamic parameters&lt;/strong&gt; and &lt;strong&gt;Allow inprocess&lt;/strong&gt;. Click &lt;strong&gt;0K&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/provider_options.png&quot; alt=&quot;Provider options&quot; title=&quot;Oracle Provider Options for OLE DB&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;provider-options-stored-procedure-approach&quot;&gt;Provider options: Stored Procedure Approach&lt;/h3&gt;
+&lt;p&gt;Alternatively, run these two stored procedures in the Managment Studio console:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp_MSset_oledb_prop&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ORAOLEDB.Oracle&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;AllowInProcess&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp_MSset_oledb_prop&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ORAOLEDB.Oracle&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;DynamicParameters&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;actually-linking-the-server&quot;&gt;Actually Linking the Server&lt;/h3&gt;
+&lt;p&gt;Ok, &lt;em&gt;we are near the end here!!!&lt;/em&gt;  You’ll need your PowerSchool instances IP address, instance name (usually someithing like VA038, which is the state you are in followed by 3 integers).  &lt;/p&gt;
+
+&lt;p&gt;In the left hand navigation of Managment Studio right-click &lt;strong&gt;Linked Servers&lt;/strong&gt; and select “New Linked Server…”, which opens the &lt;strong&gt;New Linked Server&lt;/strong&gt; dialogue. Inder the &lt;strong&gt;General Page&lt;/strong&gt; put the name of your soon-to-be-linked server in the text box next “Linked server:” (in Chicago we us ‘PS_CHI’ and KIPP NJ (née Team) usees ‘PS_TEAM’).&lt;/p&gt;
+
+&lt;p&gt;Under &lt;strong&gt;Server type:*	 select “Other data source” and select **Oracle Provider for OLE DB&lt;/strong&gt;.  Fill in “Oracle” for &lt;strong&gt;Product name&lt;/strong&gt;, 	and the data source string (written IP_Address:1521/InstanceID, see figure below for an example). Leave &lt;strong&gt;Provider string:&lt;/strong&gt; blank. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new_linked_server_general.png&quot; alt=&quot;New Linked Server General&quot; title=&quot;New Linked Server General&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now click on *Security** udner &lt;strong&gt;Select page&lt;/strong&gt; in the same dialogue box.  Under the &lt;strong&gt;For a login not defined in the list above, connections will&lt;/strong&gt; prompt select the &lt;strong&gt;Be made using this security context&lt;/strong&gt; choice.  Fill in your &lt;strong&gt;Remote login:&lt;/strong&gt;  (usually ‘PSNAVIGATOR’) and your password for that user. Click &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/new_inked_server_security.png&quot; alt=&quot;New Linked Server Security&quot; title=&quot;New Linked Server Security&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You should, if all goes well, have a connected Server.  You can run the following bit of SQL as a quick test:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;OPENQUERY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS_CHI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		  &lt;span class=&quot;s1&quot;&gt;&amp;#39;SELECT  *&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;		   FROM students&amp;#39;&lt;/span&gt;
+		  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;accessing-your-sql-server-instance-and-linked-databases-like-powerschool-from-outside-of-sql-server-management-studio&quot;&gt;Accessing your SQL Server Instance (and linked databases like PowerSchool) from outside of SQL Server Management Studio&lt;/h2&gt;
+
+&lt;p&gt;So we went through this rigmarole of setting up a user on the KIPP_Silo database. Why?  Because we will use that user to access the database (and any linked databases therein) from outside to SQL Server Management Studio (which automagically connects to your SQL Server Database).  This is especially important if you will want to access your data from Python or R script to load your data from outside applications (ST Math, i-Ready, Kickboard, etc.) into the database, do any stastical analysis, or create and maintain roster integrations.  So it is pretty important. &lt;/p&gt;
+
+&lt;p&gt;If you’ve done nothing to your DB since spinning up the Windows Server EC2 instance, then your instance is pretty locked down and hard to accesss.  The following steps will open it to applications running on the same instance (i.e., on the same Windows Server computer, but not to the public internet). So let’s open it up a bit.&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;strong&gt;Start&lt;/strong&gt; button, then on the &lt;strong&gt;Start Page&lt;/strong&gt; click the downward pointing arrow in a circle.  Select &lt;strong&gt;SQL Server 2014 Configuration Manager&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/apps.png&quot; alt=&quot;Apps&quot; title=&quot;Apps&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Expand &lt;strong&gt;SQL Server Network Configuration&lt;/strong&gt; and click on &lt;em&gt;*Protocols for MSSQLSERVER&lt;/em&gt;.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/config_1.png&quot; alt=&quot;Config 1&quot; title=&quot;Config 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Right-click on &lt;strong&gt;TCP/IP&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;. Click on the &lt;strong&gt;IP Addresses&lt;/strong&gt; tab.  Scroll down to &lt;strong&gt;IP4&lt;/strong&gt; and verify that is for your local hose (127.0.0.1).  Set the &lt;strong&gt;Active&lt;/strong&gt; and &lt;strong&gt;Enabled&lt;/strong&gt; properties to &lt;strong&gt;YES&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/config_2.png&quot; alt=&quot;Config 2&quot; title=&quot;Config 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;strong&gt;Protocol* tab and verify **Enabled&lt;/strong&gt; and &lt;strong&gt;Listen All&lt;/strong&gt; are set to &lt;strong&gt;Yes&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, restart your SQL Server Services. In the left-hand navigation pane click on &lt;strong&gt;SQL Server Services&lt;/strong&gt;, then right click on &lt;em&gt;*SQL Server (MSSQLSERVER) and select **Restart&lt;/em&gt;.
+&lt;img src=&quot;/images/config_2.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it.  You should now have a SQL Server instance that be accessed locally by your own scripts and a clear view of your linked PowerSchool Instance.  &lt;/p&gt;
+
+&lt;p&gt;Again, these directions/this documentation is long and I may have left out some crucial step.  So if you run into any problems just let me know. &lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 16 Sep 2014 15:00:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/09/16/Setting_up_PoweSchool_on_SQL_Server/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/16/Setting_up_PoweSchool_on_SQL_Server/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Setting up SQL Server on AWS</title>
