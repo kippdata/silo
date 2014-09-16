@@ -182,10 +182,10 @@ Right-click on **TCP/IP** and select **Properties**. Click on the **IP Addresses
 
 ![Config 2]({{ site.baseurl }}/images/config_2.png "Config 2")
 
-Click on the **Protocol* tab and verify **Enabled** and **Listen All** are set to **Yes**. Click **OK**.
+Click on the **Protocol** tab and verify **Enabled** and **Listen All** are set to **Yes**. Click **OK**.
 
 
-Finally, restart your SQL Server Services. In the left-hand navigation pane click on **SQL Server Services**, then right click on **SQL Server (MSSQLSERVER) and select **Restart*.
+Finally, restart your SQL Server Services. In the left-hand navigation pane click on **SQL Server Services**, then right click on **SQL Server (MSSQLSERVER)** and select **Restart**.
 ![Config 3]({{ site.baseurl }}/images/config_2.png "Config 3")
 
 
