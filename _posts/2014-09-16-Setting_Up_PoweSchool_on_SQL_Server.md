@@ -54,7 +54,7 @@ You'll also need a Java Developer Kit (JDK).  You get that here!
 
 ## Get Oracle Client software
 
-You needd to install the correct Oracle drivers.  You want the latest version of the Oracle Data Access Components (ODAC), and you want the XCopy deployment.  They are available here:
+You need to install the correct Oracle drivers.  You want the latest version of the Oracle Data Access Components (ODAC), and you want the XCopy deployment.  They are available here:
 
 [64-bit Oracle Data Access Components (ODAC) Downloads](http://www.oracle.com/technetwork/database/windows/downloads/index-090165.html)
 
@@ -119,7 +119,7 @@ Ok. Now you need to set some parameters for the linked server provider (i.e., th
 You first must configure the Oracle OleDB provider (ORAOLEDB.Oracle) to run inside the SQL Server process and then configure it to accept parameters. There are two ways to do this: one with the SQL Server Management Studio GUI interface and another by firing off some stored procedures.  You need only to done of these approaches
 
 ### Provider options: GUI Approach
-It's pretty straighforward to use the GUI.  In Management Studio's left-hand navigation pane expand **Server Objects**, then expand **Linked Servers**, and then expand **Providers**.  Right click on **ORAOLEDB.Oracle** and select **Properties**, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable **Dynamic parameters** and **Allow inprocess**. Click **0K**.
+It's pretty straighforward to use the GUI.  In Management Studio's left-hand navigation pane expand **Server Objects**, then expand **Linked Servers**, and then expand **Providers**.  Right click on **ORAOLEDB.Oracle** and select **Properties**, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable **Dynamic parameters** and **Allow inprocess**. Click **OK**.
 
 ![Provider options]({{ site.baseurl }}/images/provider_options.png "Oracle Provider Options for OLE DB")
 
@@ -186,7 +186,7 @@ Click on the **Protocol** tab and verify **Enabled** and **Listen All** are set 
 
 
 Finally, restart your SQL Server Services. In the left-hand navigation pane click on **SQL Server Services**, then right click on **SQL Server (MSSQLSERVER)** and select **Restart**.
-![Config 3]({{ site.baseurl }}/images/config_2.png "Config 3")
+![Config 3]({{ site.baseurl }}/images/config_3.png "Config 3")
 
 
 That's it.  You should now have a SQL Server instance that be accessed locally by your own scripts and a clear view of your linked PowerSchool Instance.  
