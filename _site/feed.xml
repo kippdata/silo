@@ -5,19 +5,63 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 16 Sep 2014 13:43:31 -0500</pubDate>
-    <lastBuildDate>Tue, 16 Sep 2014 13:43:31 -0500</lastBuildDate>
+    <pubDate>Thu, 25 Sep 2014 17:28:24 -0500</pubDate>
+    <lastBuildDate>Thu, 25 Sep 2014 17:28:24 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
+        <title>Auto-provisioning ST Math Rosters with KIPP Silo</title>
+        <description>&lt;p&gt;This is some quick and dirty documentation for auto-provisioning rosters to ST Math from your KIPP Silo instance.&lt;/p&gt;
+
+&lt;p&gt;I’ve commited to &lt;a href=&quot;http://www.github.com/kippdata/silo&quot;&gt;our github page&lt;/a&gt; &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math_Rosters.py&quot;&gt;two&lt;/a&gt; &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math_Teacher_Rosters.py&quot;&gt;Python&lt;/a&gt; scripts, and a &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math.config&quot;&gt;config file&lt;/a&gt;, &lt;/p&gt;
+
+&lt;p&gt;For this roster provision to work you need to have a &lt;a href=&quot;/2014/08/02/SQL-Server-on-AWS/&quot;&gt;KIPP Silo instance up and running&lt;/a&gt; and have &lt;a href=&quot;/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/&quot;&gt;linked it to PowerSchool&lt;/a&gt; (if you are using a different SIS then you’ll need to change the SQL statements in both scripts to pull in the same field from that SIS.  If  you do that, then please share you work with KIPP Silo project os other regions and schools don’t needlessy repeat your excellent work).&lt;/p&gt;
+
+&lt;p&gt;You simply need to save those files and create a directory names &lt;code&gt;/data&lt;/code&gt; (this is where the your students and teachers data will be saved before being shipped off to ST Math via SFTP) somewhere (at KIPP Chicago we have it at &lt;code&gt;C:\robots\ST_Math\&lt;/code&gt;) and then update the &lt;code&gt;ST_Math.config&lt;/code&gt; file with your KIPP Silo credentials and your ST Math SFTP credentials (if you don’t have ST Math SFTP credentials, just ask your ST Math rep).  Here is the entirety of the config file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;no&quot;&gt;[Silo]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_silo_username&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_silo_password&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;127&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;1433&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grade_level&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;[STMathSFTP]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sftp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_stmath_sftp_password&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_stmath_sftp_username&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You simply substitute your own credentials.  You might want to check that your are using the same local IP address and port number, but those are standard for SQL Server.&lt;/p&gt;
+
+&lt;p&gt;Now, the &lt;code&gt;condition:&lt;/code&gt; argument is important.  If you put in (unquoted) Oracle SQL that is legal for a &lt;code&gt;WHERE&lt;/code&gt; clause, then the script will subset your data accordingly.  In the example here all  currently enrolled students in grades 3 and 4 would be excluded. If you want to include every enrolled student then simply delete everything to the right of the colon (err, prompt?).  Do leave the &lt;code&gt;condition:&lt;/code&gt; part though: otherwise you’ll break the &lt;code&gt;ST_Math_Rosters.py&lt;/code&gt; script. &lt;/p&gt;
+
+&lt;p&gt;You then need to &lt;a href=&quot;http://technet.microsoft.com/en-us/library/cc766428.aspx&quot;&gt;set up a Task Scheduler job&lt;/a&gt; that runs both the &lt;code&gt;ST_Math_Rosters.py&lt;/code&gt; file and the &lt;code&gt;ST_Math_Teacher_Rosters.py&lt;/code&gt; file.  The job can run as frequenlty as you like: once a week, once a day, once an hour.   &lt;/p&gt;
+
+&lt;p&gt;That’s it!  &lt;/p&gt;
+
+&lt;p&gt;If you’ve set up the config file correctly the scripts will hit your KIPP Silo database and through it your PowerSchool Instance to pull your current enrollemnt and homeroom teachers from PowerSchool.  The scripts will clean up the data, add some necessary columns, create relationships between teachers and students and save the two rosters as CSVs in the data directory.  The scripts will then connect to ST Math’s SFTP server and send the files over.  ST Math then updates your rosters.  We run this scripts hourly since ST Math checks the directory you sent the files to hourly.&lt;/p&gt;
+
+&lt;p&gt;That’s really it!&lt;/p&gt;
+
+&lt;p&gt;Stay tuned for pulling your data out of ST Math and loading it into KIPP Silo. (A feat I will achieve by stealling KIPP NJ’s extant scripts and do some light refactoring to make them ore configurable!) &lt;/p&gt;
+</description>
+        <pubDate>Thu, 25 Sep 2014 12:00:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/2014/09/25/ST_Math_Integration/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/25/ST_Math_Integration/</guid>
+        
+        
+      </item>
+    
+      <item>
         <title>Linking PowerSchool to SQL Server</title>
-        <description>&lt;p&gt;This rather longish document outlines a couple of important steps in configuring your KIPP Silo instance. It is primarly aimed at setting up a linked server (specifically PowerSchools Oracle back-end) on MS SQL Server.  It also covers in passing &lt;/p&gt;
+        <description>&lt;p&gt;This rather longish document outlines a couple of important steps in configuring your KIPP Silo instance. It is primarily aimed at setting up a linked server (specifically PowerSchools Oracle back-end) on MS SQL Server.  It also covers in passing &lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;how to connect to your EC2 instance;&lt;/li&gt;
   &lt;li&gt;setting up a VPN for Person-hosted PowerSchool&lt;/li&gt;
   &lt;li&gt;creating a new database in SQL Server&lt;/li&gt;
-  &lt;li&gt;createing a new user in SQL Server and allowing that user access to a database.&lt;/li&gt;
+  &lt;li&gt;creating a new user in SQL Server and allowing that user access to a database.&lt;/li&gt;
   &lt;li&gt;Allowing local access to your database.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -25,7 +69,7 @@
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#pre-reqs&quot;&gt;Pre-reqs&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#get-f5-big-ip--client&quot;&gt;Get F5 Big-IP  Client&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-f5-big-ip-edge-client&quot;&gt;Get F5 Big-IP Edge Client&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#get-java&quot;&gt;Get Java&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#get-oracle-client-software&quot;&gt;Get Oracle Client software&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#create-kipp-silo-database&quot;&gt;Create KIPP Silo Database&lt;/a&gt;    &lt;ul&gt;
@@ -55,7 +99,7 @@
   &lt;li&gt;Text Editors (you will need something like this)
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;http://www.sublimetext.com/2&quot;&gt;Sublime Text 2&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.lighttable.com/&quot;&gt;LightTable&lt;/a&gt;: This is pretty cool text editor that allows for line-by-line evalation of code in scripts. It’s pretty bleeding-edge so YMMV. &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.lighttable.com/&quot;&gt;LightTable&lt;/a&gt;: This is pretty cool text editor that allows for line-by-line evalu	ation of code in scripts. It’s pretty bleeding-edge so YMMV. &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;Programming languages and Integrated Development Environments
@@ -67,8 +111,8 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;get-f5-big-ip--client&quot;&gt;Get F5 Big-IP  Client&lt;/h2&gt;
-&lt;p&gt;If you have a PowerSource account with Pearson you get it by searching for &lt;a href=&quot;https://powersource.pearsonschoolsystems.com/article/70601?from=search&quot;&gt;artilce #70601&lt;/a&gt;:&lt;/p&gt;
+&lt;h2 id=&quot;get-f5-big-ip-edge-client&quot;&gt;Get F5 Big-IP Edge Client&lt;/h2&gt;
+&lt;p&gt;If you have a PowerSource account with Pearson you get it by searching for &lt;a href=&quot;https://powersource.pearsonschoolsystems.com/article/70601?from=search&quot;&gt;article #70601&lt;/a&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/F5_Big_IP_client.png&quot; alt=&quot;F5 Big-IP Edge Client via PowerSource&quot; title=&quot;F5 Big-IP&quot; /&gt;&lt;/p&gt;
 
@@ -82,7 +126,7 @@
 
 &lt;h2 id=&quot;get-oracle-client-software&quot;&gt;Get Oracle Client software&lt;/h2&gt;
 
-&lt;p&gt;You needd to install the correct Oracle drivers.  You want the latest version of the Oracle Data Access Components (ODAC), and you want the XCopy deployment.  They are available here:&lt;/p&gt;
+&lt;p&gt;You need to install the correct Oracle drivers.  You want the latest version of the Oracle Data Access Components (ODAC), and you want the XCopy deployment.  They are available here:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.oracle.com/technetwork/database/windows/downloads/index-090165.html&quot;&gt;64-bit Oracle Data Access Components (ODAC) Downloads&lt;/a&gt;&lt;/p&gt;
 
@@ -102,14 +146,14 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oracle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odac64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Next you need to &lt;strong&gt;reboot your system&lt;/strong&gt;.  Click the &lt;strong&gt;Start&lt;/strong&gt; button in the lower left hand corner of you screen (it looks like an abstract 4-pane window viewed at an angle), which brings up the “Start page”. Click on the power icon in the upper right hand corner of the screen.  Select &lt;strong&gt;Restart&lt;/strong&gt;.  Twiddle you thumbs. &lt;/p&gt;
+&lt;p&gt;Next you need to &lt;strong&gt;reboot your system&lt;/strong&gt;.  Click the &lt;strong&gt;Start&lt;/strong&gt; button in the lower left hand corner of you screen (it looks like an abstract 4-pane window viewed at an angle), which brings up the “Start page”. Click on the power icon in the upper right hand corner of the screen.  Select &lt;strong&gt;Restart&lt;/strong&gt;.  Twiddle your thumbs. &lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h2 id=&quot;create-kipp-silo-database&quot;&gt;Create KIPP Silo Database&lt;/h2&gt;
 
 &lt;h3 id=&quot;create-the-db&quot;&gt;Create the DB&lt;/h3&gt;
-&lt;p&gt;Open up Microsoft SQL Server Management Studio.  Creating a new database is really super simple. Right click on &lt;strong&gt;Databases&lt;/strong&gt; in the left-hand navigation pane and select “New Database…”:&lt;/p&gt;
+&lt;p&gt;Open up Microsoft SQL Server Management Studio.  Creating a new database is really super simple. Right click on &lt;strong&gt;Databases&lt;/strong&gt; in the left-hand navigation pane and select &lt;strong&gt;New Database…&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/new_database_1.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 1&quot; /&gt;&lt;/p&gt;
 
@@ -124,13 +168,13 @@
 
 &lt;p&gt;Now give the new user a name (say, “silo”), click the radio button for &lt;strong&gt;SQL Server authentication&lt;/strong&gt; and give that user a password. &lt;/p&gt;
 
-&lt;p&gt;Uncheck the “Enforce password experiration”. &lt;/p&gt;
+&lt;p&gt;Uncheck the “Enforce password expiration”. &lt;/p&gt;
 
 &lt;p&gt;Select “KIPP_Silo” (or whatever you named the DB above) in the Default Database dropdown.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/create_silo_user_1.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Click on &lt;strong&gt;User Mapping&lt;/strong&gt;* under &lt;strong&gt;Select a page&lt;/strong&gt;.  Click the checkbox next to ‘KIPP_Silo’ and ensure that the checkboxes next to db_datawriter, db_datareader, and public are checked.  Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Click on &lt;strong&gt;User Mapping&lt;/strong&gt; under &lt;strong&gt;Select a page&lt;/strong&gt;.  Click the checkbox next to ‘KIPP_Silo’ and ensure that the checkboxes next to db_datawriter, db_datareader, and public are checked.  Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/create_silo_user_2.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 2&quot; /&gt;&lt;/p&gt;
 
@@ -143,7 +187,7 @@
 &lt;p&gt;You first must configure the Oracle OleDB provider (ORAOLEDB.Oracle) to run inside the SQL Server process and then configure it to accept parameters. There are two ways to do this: one with the SQL Server Management Studio GUI interface and another by firing off some stored procedures.  You need only to done of these approaches&lt;/p&gt;
 
 &lt;h3 id=&quot;provider-options-gui-approach&quot;&gt;Provider options: GUI Approach&lt;/h3&gt;
-&lt;p&gt;It’s pretty straighforward to use the GUI.  In Management Studio’s left-hand navigation pane expand &lt;strong&gt;Server Objects&lt;/strong&gt;, then expand &lt;strong&gt;Linked Servers&lt;/strong&gt;, and then expand &lt;strong&gt;Providers&lt;/strong&gt;.  Right click on &lt;strong&gt;ORAOLEDB.Oracle&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable &lt;strong&gt;Dynamic parameters&lt;/strong&gt; and &lt;strong&gt;Allow inprocess&lt;/strong&gt;. Click &lt;strong&gt;0K&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;It’s pretty straighforward to use the GUI.  In Management Studio’s left-hand navigation pane expand &lt;strong&gt;Server Objects&lt;/strong&gt;, then expand &lt;strong&gt;Linked Servers&lt;/strong&gt;, and then expand &lt;strong&gt;Providers&lt;/strong&gt;.  Right click on &lt;strong&gt;ORAOLEDB.Oracle&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable &lt;strong&gt;Dynamic parameters&lt;/strong&gt; and &lt;strong&gt;Allow inprocess&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/provider_options.png&quot; alt=&quot;Provider options&quot; title=&quot;Oracle Provider Options for OLE DB&quot; /&gt;&lt;/p&gt;
 
@@ -156,15 +200,15 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;actually-linking-the-server&quot;&gt;Actually Linking the Server&lt;/h3&gt;
-&lt;p&gt;Ok, &lt;em&gt;we are near the end here!!!&lt;/em&gt;  You’ll need your PowerSchool instances IP address, instance name (usually someithing like VA038, which is the state you are in followed by 3 integers).  &lt;/p&gt;
+&lt;p&gt;Ok, &lt;em&gt;we are near the end here!!!&lt;/em&gt;  You’ll need your PowerSchool instances IP address, instance name (usually something like VA038, which is the state you are in followed by 3 integers).  &lt;/p&gt;
 
-&lt;p&gt;In the left hand navigation of Managment Studio right-click &lt;strong&gt;Linked Servers&lt;/strong&gt; and select “New Linked Server…”, which opens the &lt;strong&gt;New Linked Server&lt;/strong&gt; dialogue. Inder the &lt;strong&gt;General Page&lt;/strong&gt; put the name of your soon-to-be-linked server in the text box next “Linked server:” (in Chicago we us ‘PS_CHI’ and KIPP NJ (née Team) usees ‘PS_TEAM’).&lt;/p&gt;
+&lt;p&gt;In the left hand navigation of Management Studio right-click &lt;strong&gt;Linked Servers&lt;/strong&gt; and select “New Linked Server…”, which opens the &lt;strong&gt;New Linked Server&lt;/strong&gt; dialogue. Under the &lt;strong&gt;General Page&lt;/strong&gt; put the name of your soon-to-be-linked server in the text box next “Linked server:” (in Chicago we us ‘PS_CHI’ and KIPP NJ (née Team) uses ‘PS_TEAM’).&lt;/p&gt;
 
-&lt;p&gt;Under &lt;strong&gt;Server type:*	 select “Other data source” and select **Oracle Provider for OLE DB&lt;/strong&gt;.  Fill in “Oracle” for &lt;strong&gt;Product name&lt;/strong&gt;, 	and the data source string (written IP_Address:1521/InstanceID, see figure below for an example). Leave &lt;strong&gt;Provider string:&lt;/strong&gt; blank. &lt;/p&gt;
+&lt;p&gt;Under &lt;strong&gt;Server type:&lt;/strong&gt;	 select “Other data source” and select &lt;strong&gt;Oracle Provider for OLE DB&lt;/strong&gt;.  Fill in “Oracle” for &lt;strong&gt;Product name&lt;/strong&gt;, 	and the data source string (written IP_Address:1521/InstanceID, see figure below for an example). Leave &lt;strong&gt;Provider string:&lt;/strong&gt; blank. &lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/new_linked_server_general.png&quot; alt=&quot;New Linked Server General&quot; title=&quot;New Linked Server General&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now click on *Security** udner &lt;strong&gt;Select page&lt;/strong&gt; in the same dialogue box.  Under the &lt;strong&gt;For a login not defined in the list above, connections will&lt;/strong&gt; prompt select the &lt;strong&gt;Be made using this security context&lt;/strong&gt; choice.  Fill in your &lt;strong&gt;Remote login:&lt;/strong&gt;  (usually ‘PSNAVIGATOR’) and your password for that user. Click &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now click on &lt;strong&gt;Security&lt;/strong&gt; under &lt;strong&gt;Select page&lt;/strong&gt; in the same dialogue box.  Under the &lt;strong&gt;For a login not defined in the list above, connections will&lt;/strong&gt; prompt select the &lt;strong&gt;Be made using this security context&lt;/strong&gt; choice.  Fill in your &lt;strong&gt;Remote login:&lt;/strong&gt;  (usually ‘PSNAVIGATOR’) and your password for that user. Click &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/new_inked_server_security.png&quot; alt=&quot;New Linked Server Security&quot; title=&quot;New Linked Server Security&quot; /&gt;&lt;/p&gt;
 
@@ -181,9 +225,9 @@
 
 &lt;h2 id=&quot;accessing-your-sql-server-instance-and-linked-databases-like-powerschool-from-outside-of-sql-server-management-studio&quot;&gt;Accessing your SQL Server Instance (and linked databases like PowerSchool) from outside of SQL Server Management Studio&lt;/h2&gt;
 
-&lt;p&gt;So we went through this rigmarole of setting up a user on the KIPP_Silo database. Why?  Because we will use that user to access the database (and any linked databases therein) from outside to SQL Server Management Studio (which automagically connects to your SQL Server Database).  This is especially important if you will want to access your data from Python or R script to load your data from outside applications (ST Math, i-Ready, Kickboard, etc.) into the database, do any stastical analysis, or create and maintain roster integrations.  So it is pretty important. &lt;/p&gt;
+&lt;p&gt;So we went through this rigmarole of setting up a user on the KIPP_Silo database. Why?  Because we will use that user to access the database (and any linked databases therein) from outside to SQL Server Management Studio (which automagically connects to your SQL Server Database).  This is especially important if you will want to access your data from Python or R script to load your data from outside applications (ST Math, i-Ready, Kickboard, etc.) into the database, do any statistical analysis, or create and maintain roster integrations.  So it is pretty important. &lt;/p&gt;
 
-&lt;p&gt;If you’ve done nothing to your DB since spinning up the Windows Server EC2 instance, then your instance is pretty locked down and hard to accesss.  The following steps will open it to applications running on the same instance (i.e., on the same Windows Server computer, but not to the public internet). So let’s open it up a bit.&lt;/p&gt;
+&lt;p&gt;If you’ve done nothing to your DB since spinning up the Windows Server EC2 instance, then your instance is pretty locked down and hard to access.  The following steps will open it to applications running on the same instance (i.e., on the same Windows Server computer, but not to the public internet). So let’s open it up a bit.&lt;/p&gt;
 
 &lt;p&gt;Click on the &lt;strong&gt;Start&lt;/strong&gt; button, then on the &lt;strong&gt;Start Page&lt;/strong&gt; click the downward pointing arrow in a circle.  Select &lt;strong&gt;SQL Server 2014 Configuration Manager&lt;/strong&gt;:&lt;/p&gt;
 
@@ -197,10 +241,10 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/config_2.png&quot; alt=&quot;Config 2&quot; title=&quot;Config 2&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Click on the &lt;strong&gt;Protocol* tab and verify **Enabled&lt;/strong&gt; and &lt;strong&gt;Listen All&lt;/strong&gt; are set to &lt;strong&gt;Yes&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Click on the &lt;strong&gt;Protocol&lt;/strong&gt; tab and verify &lt;strong&gt;Enabled&lt;/strong&gt; and &lt;strong&gt;Listen All&lt;/strong&gt; are set to &lt;strong&gt;Yes&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;Finally, restart your SQL Server Services. In the left-hand navigation pane click on &lt;strong&gt;SQL Server Services&lt;/strong&gt;, then right click on &lt;em&gt;*SQL Server (MSSQLSERVER) and select **Restart&lt;/em&gt;.
-&lt;img src=&quot;/images/config_2.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Finally, restart your SQL Server Services. In the left-hand navigation pane click on &lt;strong&gt;SQL Server Services&lt;/strong&gt;, then right click on &lt;strong&gt;SQL Server (MSSQLSERVER)&lt;/strong&gt; and select &lt;strong&gt;Restart&lt;/strong&gt;.
+&lt;img src=&quot;/images/config_3.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;That’s it.  You should now have a SQL Server instance that be accessed locally by your own scripts and a clear view of your linked PowerSchool Instance.  &lt;/p&gt;
 
@@ -208,8 +252,8 @@
 
 </description>
         <pubDate>Tue, 16 Sep 2014 15:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/09/16/Setting_up_PoweSchool_on_SQL_Server/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/16/Setting_up_PoweSchool_on_SQL_Server/</guid>
+        <link>http://kippdata.github.io/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</guid>
         
         
       </item>
@@ -496,27 +540,6 @@
         <pubDate>Tue, 15 Jul 2014 17:00:00 -0500</pubDate>
         <link>http://kippdata.github.io/silo/2014/07/15/first_commit/</link>
         <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/15/first_commit/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Introducing KIPP Silo</title>
-        <description>&lt;p&gt;I’m pleased to announce that the &lt;a href=&quot;https://www.kippshare.org/message/12867#12867&quot;&gt;KIPP Network Normed Data Warehouse&lt;/a&gt; (gated) sparked by &lt;a href=&quot;https://github.com/jdozier&quot; class=&quot;user-mention&quot;&gt;@jdozier&lt;/a&gt; is up and running and Andrew, James, and I have come up with what we think is a relatively clever name:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/KIPP_Silo_1.png&quot; alt=&quot;KIPP Silo&quot; title=&quot;KIPP Silo&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A silo is ‘a deep bin for storing material’ as is KIPP Silo. KIPP Silo is the KIPP Network’s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.&lt;/p&gt;
-
-&lt;p&gt;Right now things are bare bones, save for the fact we have a &lt;a href=&quot;https://github.com/kippdata/silo&quot;&gt;GitHub repo&lt;/a&gt; which can be cloned or (probably) more likely forked for indiviudal development and collaboration.  In other words, anybody (well anybody who know’s how to use GitHub right now) can start writing and sharing code &lt;strong&gt;right now&lt;/strong&gt;! &lt;/p&gt;
-
-&lt;p&gt;(For what it’s work, I think the best git workflow for this project is either a &lt;a href=&quot;https://www.atlassian.com/git/workflows#!workflow-forking&quot;&gt;forking workflow&lt;/a&gt; or a &lt;a href=&quot;https://www.atlassian.com/git/workflows#!workflow-feature-branch&quot;&gt;feature branch workflow&lt;/a&gt;).  My best guess is the former, although requiring a little more overhead will keep the waters of the master branch clearer, so to speak.)&lt;/p&gt;
-
-&lt;p&gt;This landing page/website will be used for announcing version releases and providing some tutorials on using the tools we’ll use to coordinate our development efforts at building this.  I’ve started a stub in &lt;a href=&quot;tools.md&quot;&gt;Tools&lt;/a&gt; I cannot convey to all of you how excited I am about this endevour, but I do know that our future selves will thank us!.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 12 Jul 2014 18:15:15 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/12/lets_build_a_silo/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/12/lets_build_a_silo/</guid>
         
         
       </item>
