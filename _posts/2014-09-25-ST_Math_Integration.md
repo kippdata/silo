@@ -11,7 +11,7 @@ I've committed to [our github page](http://www.github.com/kippdata/***REMOVED***
 
 For this roster provision to work you need to have a [KIPP Silo instance up and running]({% post_url 2014-08-02-SQL-Server-on-AWS %}) and have [linked it to PowerSchool]({% post_url 2014-09-16-Setting_Up_PoweSchool_on_SQL_Server %}) (if you are using a different SIS then you'll need to change the SQL statements in both scripts to pull in the same field from that SIS.  If  you do that, then please share you work with KIPP Silo project os other regions and schools don't needlessly repeat your excellent work).
 
-You simply need to save those files and create a directory names `/data` (this is where the your students and teachers data will be saved before being shipped off to ST Math via SFTP) somewhere (at KIPP Chicago we have it at `C:\robots\ST_Math\`) and then update the `ST_Math.config` file with your KIPP Silo credentials and your ST Math SFTP credentials (if you don't have ST Math SFTP credentials, just ask your ST Math rep).  Here is the entirety of the config file:
+You simply need to save those files and create a directory named `/data` (this is where the your students and teachers data will be saved before being shipped off to ST Math via SFTP) somewhere (at KIPP Chicago we have it at `C:\robots\ST_Math\`) and then update the `ST_Math.config` file with your KIPP Silo credentials and your ST Math SFTP credentials (if you don't have ST Math SFTP credentials, just ask your ST Math rep).  Here is the entirety of the config file:
 
 {% highlight powershell %}
 [Silo]
