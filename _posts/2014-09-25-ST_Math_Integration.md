@@ -35,8 +35,8 @@ You then need to [set up a Task Scheduler job](http://technet.microsoft.com/en-u
 
 That's it!  
 
-If you've set up the config file correctly the scripts will hit your KIPP Silo database and through it your PowerSchool Instance to pull your current enrollemnt and homeroom teachers from PowerSchool.  The scripts will clean up the data, add some necessary columns, create relationships between teachers and students and save the two rosters as CSVs in the data directory.  The scripts will then connect to ST Math's SFTP server and send the files over.  ST Math then updates your rosters.  We run this scripts hourly since ST Math checks the directory you sent the files to hourly.
+If you've set up the config file correctly the scripts will hit your KIPP Silo database and through it your PowerSchool Instance to pull your current enrollment and homeroom teachers from PowerSchool.  The scripts will clean up the data, add some necessary columns, create relationships between teachers and students and save the two rosters as CSVs in the data directory.  The scripts will then connect to ST Math's SFTP server and send the files over.  ST Math then updates your rosters.  We run this scripts hourly since ST Math checks the directory you sent the files to hourly.
 
 That's really it!
 
-Stay tuned for pulling your data out of ST Math and loading it into KIPP Silo. (A feat I will achieve by stealling KIPP NJ's extant scripts and do some light refactoring to make them ore configurable!) 
+Stay tuned for pulling your data out of ST Math and loading it into KIPP Silo. (A feat I will achieve by stealing KIPP NJ's extant scripts and do some light refactoring to make them ore configurable!) 
