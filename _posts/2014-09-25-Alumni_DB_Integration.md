@@ -27,5 +27,16 @@ DB_PASSWORD = ''
 
 You simply substitute your own credentials.  Easiest use is to set up a DNS directly to where in SQL Server instance you'll store these data.
 
-You then need to [set up a Task Scheduler job](http://technet.microsoft.com/en-us/library/cc766428.aspx) to hit the `sf_get_and_load.py`.  You will in all likelihood need to use a 64-bit Python interpretor, since the `Account` table in the Alumni DB is huge and the `pandas` package won't be able to handle it in 32-bit Python. The (Anaconda distribtuion is great)[https://store.continuum.io/cshop/anaconda/].
+The other two files are `databaseconfig.py` and `sf_get_and_load.py`.  The first one is a module that is imported into the second and has some resuable functions that can be used to connect to SQL Server as well as  push data from a `pandas dataframe` up to SQL server.  It creates a new table if that data is new; otherwise it trunctes the table and appends you data.  Not as sophisticated as an upsert, but for most integrations good enough.  
+
+The `sf_get_and_load.py` is were the magic happens. It pulls five tables from the Alumni DB, creates dataframes for each, and then loads each up to SQL server.  The five tables are:
+
+* `Account`, 
+* `Contact`, 
+* `College_Persistence__c`, 
+* `Contact`, 
+* `Contact_Note__c`, 
+* `Enrollment__c`.
+
+You can [set up a Task Scheduler job](http://technet.microsoft.com/en-us/library/cc766428.aspx) to hit the `sf_get_and_load.py`.  You will in all likelihood need to use a 64-bit Python interpretor, since the `Account` table in the Alumni DB is huge and the `pandas` package won't be able to handle it in 32-bit Python. The (Anaconda distribtuion is great)[https://store.continuum.io/cshop/anaconda/].
 
