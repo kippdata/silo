@@ -3,52 +3,41 @@
   <channel>
     <title>KIPP Silo</title>
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
-    <link>http://kippdata.github.io/silo/</link>
-    <atom:link href="http://kippdata.github.io/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 25 Sep 2014 17:28:24 -0500</pubDate>
-    <lastBuildDate>Thu, 25 Sep 2014 17:28:24 -0500</lastBuildDate>
+    <link>http://kippdata.github.io/silo/silo/</link>
+    <atom:link href="http://kippdata.github.io/silo/silo/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 19 Aug 2015 12:35:33 -0500</pubDate>
+    <lastBuildDate>Wed, 19 Aug 2015 12:35:33 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
-        <title>Auto-provisioning ST Math Rosters with KIPP Silo</title>
-        <description>&lt;p&gt;This is some quick and dirty documentation for auto-provisioning rosters to ST Math from your KIPP Silo instance.&lt;/p&gt;
+        <title>Alumni (SalesForce) DB Integration</title>
+        <description>&lt;p&gt;This project is still alive, in case you all were wondering.  I’ve worked with Charlie Bini and Andrew MArtin at KIPP NJ and we’ve created a very nice script that grabs the five most important Alumni DB tables form sales force and loads them up to a SQL Server DB.  They are up on our &lt;a href=&quot;http://www.github.com/kippdata/silo&quot;&gt;our github page&lt;/a&gt; now.  You can find them &lt;a href=&quot;https://github.com/kippdata/silo/tree/master/scripts/Alumni_mirror&quot;&gt;here&lt;/a&gt;! &lt;/p&gt;
 
-&lt;p&gt;I’ve commited to &lt;a href=&quot;http://www.github.com/kippdata/silo&quot;&gt;our github page&lt;/a&gt; &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math_Rosters.py&quot;&gt;two&lt;/a&gt; &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math_Teacher_Rosters.py&quot;&gt;Python&lt;/a&gt; scripts, and a &lt;a href=&quot;https://github.com/kippdata/silo/blob/master/scripts/Ed_Tech_Integrations/ST_Math/ST_Math.config&quot;&gt;config file&lt;/a&gt;, &lt;/p&gt;
+&lt;p&gt;You’ll find three files in that repo.  You only need to make changes in &lt;code&gt;config.py&lt;/code&gt; which has fields for your Salesforce credentials and your. It looks like this: &lt;/p&gt;
 
-&lt;p&gt;For this roster provision to work you need to have a &lt;a href=&quot;/2014/08/02/SQL-Server-on-AWS/&quot;&gt;KIPP Silo instance up and running&lt;/a&gt; and have &lt;a href=&quot;/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/&quot;&gt;linked it to PowerSchool&lt;/a&gt; (if you are using a different SIS then you’ll need to change the SQL statements in both scripts to pull in the same field from that SIS.  If  you do that, then please share you work with KIPP Silo project os other regions and schools don’t needlessy repeat your excellent work).&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;## Alumni Salesforce DB configurables&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SF_UID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;you@kipphawaii.org&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SF_PWD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;secret_wd!&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SF_TOKEN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&amp;#39;very_long_token_from_salesforce&amp;#39;&lt;/span&gt;
 
-&lt;p&gt;You simply need to save those files and create a directory names &lt;code&gt;/data&lt;/code&gt; (this is where the your students and teachers data will be saved before being shipped off to ST Math via SFTP) somewhere (at KIPP Chicago we have it at &lt;code&gt;C:\robots\ST_Math\&lt;/code&gt;) and then update the &lt;code&gt;ST_Math.config&lt;/code&gt; file with your KIPP Silo credentials and your ST Math SFTP credentials (if you don’t have ST Math SFTP credentials, just ask your ST Math rep).  Here is the entirety of the config file:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt;&lt;span class=&quot;no&quot;&gt;[Silo]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_silo_username&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_silo_password&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;127&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;1433&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grade_level&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;[STMathSFTP]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sftp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_stmath_sftp_password&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your_stmath_sftp_username&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## Silo DB configurables&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_TYPE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;mssql&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_API&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;pyodbc&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_DNS_NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Silo_Alumni_64&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_SERVER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Alumni_mirror&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_USERNAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DB_PASSWORD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You simply substitute your own credentials.  You might want to check that your are using the same local IP address and port number, but those are standard for SQL Server.&lt;/p&gt;
+&lt;p&gt;You simply substitute your own credentials.  Easiest use is to set up a DNS directly to where in SQL Server instance you’ll store these data.&lt;/p&gt;
 
-&lt;p&gt;Now, the &lt;code&gt;condition:&lt;/code&gt; argument is important.  If you put in (unquoted) Oracle SQL that is legal for a &lt;code&gt;WHERE&lt;/code&gt; clause, then the script will subset your data accordingly.  In the example here all  currently enrolled students in grades 3 and 4 would be excluded. If you want to include every enrolled student then simply delete everything to the right of the colon (err, prompt?).  Do leave the &lt;code&gt;condition:&lt;/code&gt; part though: otherwise you’ll break the &lt;code&gt;ST_Math_Rosters.py&lt;/code&gt; script. &lt;/p&gt;
+&lt;p&gt;You then need to &lt;a href=&quot;http://technet.microsoft.com/en-us/library/cc766428.aspx&quot;&gt;set up a Task Scheduler job&lt;/a&gt; to hit the &lt;code&gt;sf_get_and_load.py&lt;/code&gt;.  You will in all likelihood need to use a 64-bit Python interpretor, since the &lt;code&gt;Account&lt;/code&gt; table in the Alumni DB is huge and the &lt;code&gt;pandas&lt;/code&gt; package won’t be able to handle it in 32-bit Python. The (Anaconda distribtuion is great)[https://store.continuum.io/cshop/anaconda/].&lt;/p&gt;
 
-&lt;p&gt;You then need to &lt;a href=&quot;http://technet.microsoft.com/en-us/library/cc766428.aspx&quot;&gt;set up a Task Scheduler job&lt;/a&gt; that runs both the &lt;code&gt;ST_Math_Rosters.py&lt;/code&gt; file and the &lt;code&gt;ST_Math_Teacher_Rosters.py&lt;/code&gt; file.  The job can run as frequenlty as you like: once a week, once a day, once an hour.   &lt;/p&gt;
-
-&lt;p&gt;That’s it!  &lt;/p&gt;
-
-&lt;p&gt;If you’ve set up the config file correctly the scripts will hit your KIPP Silo database and through it your PowerSchool Instance to pull your current enrollemnt and homeroom teachers from PowerSchool.  The scripts will clean up the data, add some necessary columns, create relationships between teachers and students and save the two rosters as CSVs in the data directory.  The scripts will then connect to ST Math’s SFTP server and send the files over.  ST Math then updates your rosters.  We run this scripts hourly since ST Math checks the directory you sent the files to hourly.&lt;/p&gt;
-
-&lt;p&gt;That’s really it!&lt;/p&gt;
-
-&lt;p&gt;Stay tuned for pulling your data out of ST Math and loading it into KIPP Silo. (A feat I will achieve by stealling KIPP NJ’s extant scripts and do some light refactoring to make them ore configurable!) &lt;/p&gt;
 </description>
-        <pubDate>Thu, 25 Sep 2014 12:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/09/25/ST_Math_Integration/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/25/ST_Math_Integration/</guid>
+        <pubDate>Wed, 19 Aug 2015 07:00:00 -0500</pubDate>
+        <link>http://kippdata.github.io/silo/silo/2015/08/19/Alumni_DB_Integration/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2015/08/19/Alumni_DB_Integration/</guid>
         
         
       </item>
@@ -114,7 +103,7 @@
 &lt;h2 id=&quot;get-f5-big-ip-edge-client&quot;&gt;Get F5 Big-IP Edge Client&lt;/h2&gt;
 &lt;p&gt;If you have a PowerSource account with Pearson you get it by searching for &lt;a href=&quot;https://powersource.pearsonschoolsystems.com/article/70601?from=search&quot;&gt;article #70601&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/F5_Big_IP_client.png&quot; alt=&quot;F5 Big-IP Edge Client via PowerSource&quot; title=&quot;F5 Big-IP&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/F5_Big_IP_client.png&quot; alt=&quot;F5 Big-IP Edge Client via PowerSource&quot; title=&quot;F5 Big-IP&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You definitely need the F5 VPN client if your PowerSchool instance is Pearson-hosted. You’ll need to use your VPN credentials, which you can get from Pearson by calling support if you don’t know what it is. If you use another provider for hosting or self-host your PowerSchool instance then you’ll want to talk to your IT staff.&lt;/p&gt;
 
@@ -155,16 +144,16 @@
 &lt;h3 id=&quot;create-the-db&quot;&gt;Create the DB&lt;/h3&gt;
 &lt;p&gt;Open up Microsoft SQL Server Management Studio.  Creating a new database is really super simple. Right click on &lt;strong&gt;Databases&lt;/strong&gt; in the left-hand navigation pane and select &lt;strong&gt;New Database…&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/new_database_1.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/new_database_1.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now give it a name (KIPP_Silo, perhaps?) and click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/new_database_2.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/new_database_2.png&quot; alt=&quot;Create DB&quot; title=&quot;Create New DB Step 2&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;create-a-database-user&quot;&gt;Create a database user&lt;/h3&gt;
 &lt;p&gt;In order to link to your own SQL Server instance from outside of SQL Server Management Studio (i.e., from a R or Python script that manages your ST Math roster or something), you’ll need to create a user and assign that user to a database:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_0.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 0&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/create_silo_user_0.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now give the new user a name (say, “silo”), click the radio button for &lt;strong&gt;SQL Server authentication&lt;/strong&gt; and give that user a password. &lt;/p&gt;
 
@@ -172,11 +161,11 @@
 
 &lt;p&gt;Select “KIPP_Silo” (or whatever you named the DB above) in the Default Database dropdown.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_1.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/create_silo_user_1.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on &lt;strong&gt;User Mapping&lt;/strong&gt; under &lt;strong&gt;Select a page&lt;/strong&gt;.  Click the checkbox next to ‘KIPP_Silo’ and ensure that the checkboxes next to db_datawriter, db_datareader, and public are checked.  Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create_silo_user_2.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/create_silo_user_2.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 2&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -189,7 +178,7 @@
 &lt;h3 id=&quot;provider-options-gui-approach&quot;&gt;Provider options: GUI Approach&lt;/h3&gt;
 &lt;p&gt;It’s pretty straighforward to use the GUI.  In Management Studio’s left-hand navigation pane expand &lt;strong&gt;Server Objects&lt;/strong&gt;, then expand &lt;strong&gt;Linked Servers&lt;/strong&gt;, and then expand &lt;strong&gt;Providers&lt;/strong&gt;.  Right click on &lt;strong&gt;ORAOLEDB.Oracle&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;, which will open Oracle Provider for OLE DB Provider options dialog. Ensure that check boxes are ticked to enable &lt;strong&gt;Dynamic parameters&lt;/strong&gt; and &lt;strong&gt;Allow inprocess&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/provider_options.png&quot; alt=&quot;Provider options&quot; title=&quot;Oracle Provider Options for OLE DB&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/provider_options.png&quot; alt=&quot;Provider options&quot; title=&quot;Oracle Provider Options for OLE DB&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;provider-options-stored-procedure-approach&quot;&gt;Provider options: Stored Procedure Approach&lt;/h3&gt;
 &lt;p&gt;Alternatively, run these two stored procedures in the Managment Studio console:&lt;/p&gt;
@@ -206,11 +195,11 @@
 
 &lt;p&gt;Under &lt;strong&gt;Server type:&lt;/strong&gt;	 select “Other data source” and select &lt;strong&gt;Oracle Provider for OLE DB&lt;/strong&gt;.  Fill in “Oracle” for &lt;strong&gt;Product name&lt;/strong&gt;, 	and the data source string (written IP_Address:1521/InstanceID, see figure below for an example). Leave &lt;strong&gt;Provider string:&lt;/strong&gt; blank. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/new_linked_server_general.png&quot; alt=&quot;New Linked Server General&quot; title=&quot;New Linked Server General&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/new_linked_server_general.png&quot; alt=&quot;New Linked Server General&quot; title=&quot;New Linked Server General&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now click on &lt;strong&gt;Security&lt;/strong&gt; under &lt;strong&gt;Select page&lt;/strong&gt; in the same dialogue box.  Under the &lt;strong&gt;For a login not defined in the list above, connections will&lt;/strong&gt; prompt select the &lt;strong&gt;Be made using this security context&lt;/strong&gt; choice.  Fill in your &lt;strong&gt;Remote login:&lt;/strong&gt;  (usually ‘PSNAVIGATOR’) and your password for that user. Click &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/new_inked_server_security.png&quot; alt=&quot;New Linked Server Security&quot; title=&quot;New Linked Server Security&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/new_inked_server_security.png&quot; alt=&quot;New Linked Server Security&quot; title=&quot;New Linked Server Security&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You should, if all goes well, have a connected Server.  You can run the following bit of SQL as a quick test:&lt;/p&gt;
 
@@ -231,20 +220,20 @@
 
 &lt;p&gt;Click on the &lt;strong&gt;Start&lt;/strong&gt; button, then on the &lt;strong&gt;Start Page&lt;/strong&gt; click the downward pointing arrow in a circle.  Select &lt;strong&gt;SQL Server 2014 Configuration Manager&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/apps.png&quot; alt=&quot;Apps&quot; title=&quot;Apps&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/apps.png&quot; alt=&quot;Apps&quot; title=&quot;Apps&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Expand &lt;strong&gt;SQL Server Network Configuration&lt;/strong&gt; and click on &lt;em&gt;*Protocols for MSSQLSERVER&lt;/em&gt;.  &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/config_1.png&quot; alt=&quot;Config 1&quot; title=&quot;Config 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/config_1.png&quot; alt=&quot;Config 1&quot; title=&quot;Config 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Right-click on &lt;strong&gt;TCP/IP&lt;/strong&gt; and select &lt;strong&gt;Properties&lt;/strong&gt;. Click on the &lt;strong&gt;IP Addresses&lt;/strong&gt; tab.  Scroll down to &lt;strong&gt;IP4&lt;/strong&gt; and verify that is for your local hose (127.0.0.1).  Set the &lt;strong&gt;Active&lt;/strong&gt; and &lt;strong&gt;Enabled&lt;/strong&gt; properties to &lt;strong&gt;YES&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/config_2.png&quot; alt=&quot;Config 2&quot; title=&quot;Config 2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/config_2.png&quot; alt=&quot;Config 2&quot; title=&quot;Config 2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on the &lt;strong&gt;Protocol&lt;/strong&gt; tab and verify &lt;strong&gt;Enabled&lt;/strong&gt; and &lt;strong&gt;Listen All&lt;/strong&gt; are set to &lt;strong&gt;Yes&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Finally, restart your SQL Server Services. In the left-hand navigation pane click on &lt;strong&gt;SQL Server Services&lt;/strong&gt;, then right click on &lt;strong&gt;SQL Server (MSSQLSERVER)&lt;/strong&gt; and select &lt;strong&gt;Restart&lt;/strong&gt;.
-&lt;img src=&quot;/images/config_3.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/silo/images/config_3.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;That’s it.  You should now have a SQL Server instance that be accessed locally by your own scripts and a clear view of your linked PowerSchool Instance.  &lt;/p&gt;
 
@@ -252,8 +241,8 @@
 
 </description>
         <pubDate>Tue, 16 Sep 2014 15:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</guid>
         
         
       </item>
@@ -285,13 +274,13 @@
 
 &lt;p&gt;First, you’ll need to go to &lt;a href=&quot;http://aws.amazon.com/&quot;&gt;Amazon Web Services&lt;/a&gt; and click on sign up:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/1-AWS_Sign_up_1.png&quot; alt=&quot;AWS Landing Page&quot; title=&quot;AWS Landing Page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/1-AWS_Sign_up_1.png&quot; alt=&quot;AWS Landing Page&quot; title=&quot;AWS Landing Page&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Go through the sign up process and then you will find your self at the &lt;strong&gt;AWS Managment Console&lt;/strong&gt;. This is where you will launch an EC2 instance, which is to say an &lt;strong&gt;E&lt;/strong&gt;lastic &lt;strong&gt;C&lt;/strong&gt;ompute web server hosted and maintained by your favorite purveyor of books and dry goods. But don’t worry, they are crack experts at hosting stuff for you in &lt;em&gt;The Cloud&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;You will see a bunch of color coded  and coordinated icons for different AWS services. The second one in orange on the left says EC2.  That’s the one you want.  Click it!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/2-AWS_Console_1.png&quot; alt=&quot;AWS Management Console 1&quot; title=&quot;AWS Management Console 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/2-AWS_Console_1.png&quot; alt=&quot;AWS Management Console 1&quot; title=&quot;AWS Management Console 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This brings your the &lt;strong&gt;EC2 Dashboard&lt;/strong&gt;. This is were you manage all your different EC2 instances.  If this is your first time launching an EC2 instance, then you’ll see lots of zeros and not much of any thing else.  &lt;/p&gt;
 
@@ -299,7 +288,7 @@
 
 &lt;p&gt;The important part of this screen for this step-by-step is the big blue button under the &lt;strong&gt;Create Instance&lt;/strong&gt;* section in the center panel labeled &lt;strong&gt;Launch Instance&lt;/strong&gt;.  Go ahead and click that bad boy:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/3-AWS_Launch_Instance.png&quot; alt=&quot;AWS EC2 Dashboard&quot; title=&quot;AWS EC2 Dashboard&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/3-AWS_Launch_Instance.png&quot; alt=&quot;AWS EC2 Dashboard&quot; title=&quot;AWS EC2 Dashboard&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;choose-ami&quot;&gt;Choose AMI&lt;/h3&gt;
 &lt;p&gt;This is the screen where you will need to pick the &lt;a href=&quot;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html&quot;&gt;Amazon Machine Image&lt;/a&gt; for the operating system (Microsoft Windows Server 2012 R2) already loaded with your copy of fully licensed database (SQL Server Standard).  You’ll need to scroll down the page a bit to find the AMI you want: &lt;/p&gt;
@@ -308,41 +297,41 @@
   &lt;li&gt;Microsoft Windows Server 2012 R2 with SQL Server Standard - ami-82e023ea&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/4-Choose_AMI.png&quot; alt=&quot;AWS Choose Instance&quot; title=&quot;AWS Choose Instance&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/4-Choose_AMI.png&quot; alt=&quot;AWS Choose Instance&quot; title=&quot;AWS Choose Instance&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;choose-instance-type&quot;&gt;Choose Instance Type&lt;/h3&gt;
 
 &lt;p&gt;Here you pick your server size, configuration, and type.  The cheapest you can buy from the on-demand instances (i.e., a pay-as-you-go plan) is the m3.medium that runs you $0.36/hour.  You can drop that price in half to $0.16/hour by paying a little bit upfront ($1061) for a longer commitment (3-years). That’s only about $5,300 over three years (i.e., $1,764/year) to have your Silo data warehouse hosted in the cloud.  Not to shabby given what your region is paying to ed tech companies to silo all of your data (ha! See what I did there).&lt;/p&gt;
 
 &lt;p&gt;So choose the m3.medium instance and click the &lt;strong&gt;Next: Configure Instance Details&lt;/strong&gt; button
-&lt;img src=&quot;/images/5-Choose_Instance.png&quot; alt=&quot;AWS Choose Instance&quot; title=&quot;AWS Choose Instance&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/silo/images/5-Choose_Instance.png&quot; alt=&quot;AWS Choose Instance&quot; title=&quot;AWS Choose Instance&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;configure-instance-details&quot;&gt;Configure Instance Details&lt;/h3&gt;
 &lt;p&gt;This will be quick and easy.  You don’t need to change anything if you don’t want to.  For the sake of safety, though, I like to check the &lt;strong&gt;Protect against accidental termination&lt;/strong&gt; box.  Why?  Well terminating and instance kills it forever. In lieu of terminating an instance, we can stop the instance, which saves the state of the instance and shuts down the server (which can save you money).  You can always restart a stopped instance, but terminated instances are gone forever. Whether you check that box or not, go ahead and click &lt;strong&gt;6. Configure Security Group&lt;/strong&gt; on the breadcrumb trail at the top of the page. (I’m skipping &lt;strong&gt;Add Storage&lt;/strong&gt; and &lt;strong&gt;Tag Instance&lt;/strong&gt;.  You can continue through those steps if you want, as they are pretty self-explanatory, but the default storage should be sufficient and tags are cool but not necessary.)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/6-Configure_Instance.png&quot; alt=&quot;AWS Configure Instance&quot; title=&quot;AWS Configure Instance&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/6-Configure_Instance.png&quot; alt=&quot;AWS Configure Instance&quot; title=&quot;AWS Configure Instance&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;configure-security-group&quot;&gt;Configure Security Group&lt;/h3&gt;
 
 &lt;p&gt;Here you can either create a new security group, which is essentially a set of rules for a firewall that secures which protocols, ports, and IP addresses will be able to access your Windows Server.  The out of the box set-up should be sufficient for right now.  You can rename the Security Group name to something memorable (how about KIPP Silo!).  The click &lt;strong&gt;Review and Launch&lt;/strong&gt;. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/7-Config_Security_Group.png&quot; alt=&quot;AWS Configure Security Group&quot; title=&quot;AWS Configure Security Group&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/7-Config_Security_Group.png&quot; alt=&quot;AWS Configure Security Group&quot; title=&quot;AWS Configure Security Group&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;launch-instance&quot;&gt;Launch Instance!&lt;/h3&gt;
 
 &lt;p&gt;You’ll now be at the review and launch instance page.  Sweet!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/8-Launch.png&quot; alt=&quot;AWS Launch&quot; title=&quot;AWS Launch&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/8-Launch.png&quot; alt=&quot;AWS Launch&quot; title=&quot;AWS Launch&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;key-pair&quot;&gt;Key Pair&lt;/h3&gt;
 &lt;p&gt;Before you launch completely, you’ll need to assign a &lt;strong&gt;key pair&lt;/strong&gt; to the server.  The key pair works just like keys do to your home or car.  You must have possession of a special file (a key file) to access the server.  Without the key you can’t access the server initially.  Upon clicking “Launch” you should see a pop-up dialogue where you can either select an existing key pair if you already have or create a new key pair (AWS has one side of the key pair—called the public key—and you have the other side–called the private key or PEM file).  Here I create a new key pair and name it &lt;strong&gt;KIPP Silo&lt;/strong&gt;. You’ll download the key to your desktop/laptop, so please keep track of it and save it somewhere memorable. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/9-Key_Pair.png&quot; alt=&quot;AWS Key Pair&quot; title=&quot;AWS Key Pair&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/9-Key_Pair.png&quot; alt=&quot;AWS Key Pair&quot; title=&quot;AWS Key Pair&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;connect&quot;&gt;Connect&lt;/h3&gt;
 
 &lt;p&gt;Click on this link and follow the instructions provided to connect to the instance. AWS provides clear instructions on connecting to your instance for Windows, Mac, or Linux.
-&lt;img src=&quot;/images/10-AWS_Connect_to_Windows_Instance.png&quot; alt=&quot;AWS Connect&quot; title=&quot;AWS Connect&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/silo/images/10-AWS_Connect_to_Windows_Instance.png&quot; alt=&quot;AWS Connect&quot; title=&quot;AWS Connect&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And that is it.  You now have a server up and running with a database installed to boot. &lt;/p&gt;
 
@@ -363,8 +352,8 @@
 
 </description>
         <pubDate>Sat, 02 Aug 2014 15:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/08/02/SQL-Server-on-AWS/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/08/02/SQL-Server-on-AWS/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/08/02/SQL-Server-on-AWS/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/08/02/SQL-Server-on-AWS/</guid>
         
         
       </item>
@@ -389,8 +378,8 @@
 
 </description>
         <pubDate>Thu, 31 Jul 2014 04:20:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/31/KSS-day-four/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/31/KSS-day-four/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/31/KSS-day-four/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/31/KSS-day-four/</guid>
         
         
       </item>
@@ -411,12 +400,12 @@
 &lt;p&gt;If all goes well, I hope to have the first 3 bullets done by lunch.&lt;/p&gt;
 
 &lt;p&gt;Here’s the location of the Grit Lounge for those who don’t yet know:
-&lt;img src=&quot;/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 3 AM&quot; title=&quot;KSS Map Day 3 AM&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/silo/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 3 AM&quot; title=&quot;KSS Map Day 3 AM&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 30 Jul 2014 05:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/30/KSS-day-three/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/30/KSS-day-three/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/30/KSS-day-three/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/30/KSS-day-three/</guid>
         
         
       </item>
@@ -425,12 +414,12 @@
         <title>KIPP Silo @ KSS Day 2 Afternoon Location</title>
         <description>&lt;p&gt;We are now in the Grit Lounge (352 B, which is right next to the Optimism Lounge): &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 2 pm&quot; title=&quot;KSS Map Day 2 pm&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 2 pm&quot; title=&quot;KSS Map Day 2 pm&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 29 Jul 2014 09:15:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/29/KSS-day-two-pm/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/29/KSS-day-two-pm/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/29/KSS-day-two-pm/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/29/KSS-day-two-pm/</guid>
         
         
       </item>
@@ -439,14 +428,14 @@
         <title>KIPP Silo @ KSS Day 2</title>
         <description>&lt;p&gt;Today let’s try and take over the Optimism Lounge (352 A): &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Tuesday.png&quot; alt=&quot;KSS Map Day 2&quot; title=&quot;KSS Map Day 2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/KSS_2014_Tuesday.png&quot; alt=&quot;KSS Map Day 2&quot; title=&quot;KSS Map Day 2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It’s right across the hall from 342 B/E, where the &lt;a href=&quot;http://www.kipp.org/00/KSS2014/mobile/session-details.cfm?s=3043&quot;&gt;Technology and Data Community Kick-off&lt;/a&gt; is located.&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 29 Jul 2014 05:43:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/29/KSS-day-two/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/29/KSS-day-two/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/29/KSS-day-two/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/29/KSS-day-two/</guid>
         
         
       </item>
@@ -458,7 +447,7 @@
 &lt;h2 id=&quot;what-are-git-and-github-anyhow&quot;&gt;What are Git and GitHub, anyhow?&lt;/h2&gt;
 
 &lt;h3 id=&quot;github&quot;&gt;GitHub&lt;/h3&gt;
-&lt;p&gt;GitHub at its core is a social networking site, not unlike &lt;a href=&quot;https://wwww.facebook.com&quot;&gt;Facebook&lt;/a&gt; or even &lt;a href=&quot;http://www.kippshare.org&quot;&gt;KIPP Share&lt;/a&gt;. You have a profile, follow folks, and can even post stuff. The stuff you post, however, is where GitHub differs from traditional social networking sites. You (usually, but not exclusively) post the code and documents of the projects you are working on the site. So &lt;em&gt;de minimus&lt;/em&gt;, GitHub gives you a secondary storage place (the first is likley your laptop) for all of your work. You can save any type of file there, not just lines of code. And having a second copy of your work is really awesome when you computer blows up or you somehow write over &lt;a href=&quot;/images/Data_system_diagram.svg&quot; title=&quot;KIPP Chicago Data Systems&quot;&gt;that awesome data flow diagram you were putting together for KSS&lt;/a&gt;(this happended to me!).&lt;/p&gt;
+&lt;p&gt;GitHub at its core is a social networking site, not unlike &lt;a href=&quot;https://wwww.facebook.com&quot;&gt;Facebook&lt;/a&gt; or even &lt;a href=&quot;http://www.kippshare.org&quot;&gt;KIPP Share&lt;/a&gt;. You have a profile, follow folks, and can even post stuff. The stuff you post, however, is where GitHub differs from traditional social networking sites. You (usually, but not exclusively) post the code and documents of the projects you are working on the site. So &lt;em&gt;de minimus&lt;/em&gt;, GitHub gives you a secondary storage place (the first is likley your laptop) for all of your work. You can save any type of file there, not just lines of code. And having a second copy of your work is really awesome when you computer blows up or you somehow write over &lt;a href=&quot;/silo/images/Data_system_diagram.svg&quot; title=&quot;KIPP Chicago Data Systems&quot;&gt;that awesome data flow diagram you were putting together for KSS&lt;/a&gt;(this happended to me!).&lt;/p&gt;
 
 &lt;p&gt;Nevertheless, GitHub really shines at hosting code repositories and supporting software development.  At the heart of its support is the Git &lt;a href=&quot;http://Git-scm.com/video/what-is-version-control&quot;&gt;version control&lt;/a&gt; system.  And GitHub makes Git super easy to use by providing a visual user interface and a place to host your repositories (the set-up of which is a snap and really well documented).  Of course, you can always use GitHub from the command line.&lt;/p&gt;
 
@@ -496,8 +485,8 @@
 
 </description>
         <pubDate>Tue, 29 Jul 2014 01:19:13 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/29/git-resources/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/29/git-resources/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/29/git-resources/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/29/git-resources/</guid>
         
         
       </item>
@@ -506,7 +495,7 @@
         <title>KIPP Silo @ KSS Day 1</title>
         <description>&lt;p&gt;If you are in Houston this Monday morning or afternoon, Andrew (&lt;a href=&quot;https://github.com/almartin82&quot; class=&quot;user-mention&quot;&gt;@almartin82&lt;/a&gt;), Erin Gunn (&lt;a href=&quot;https://github.com/eringunn&quot; class=&quot;user-mention&quot;&gt;@eringunn&lt;/a&gt;), Arie Glazier (&lt;a href=&quot;https://github.com/arieglazier&quot; class=&quot;user-mention&quot;&gt;@arieglazier&lt;/a&gt;) (he’s new and with &lt;a href=&quot;http://www.kippneworleans.org&quot;&gt;KIPP New Orleans&lt;/a&gt; so be sure say hi to him ), and I  (&lt;a href=&quot;https://github.com/chrishaid&quot; class=&quot;user-mention&quot;&gt;@chrishaid&lt;/a&gt;) are working in 342 D of the GRB Conference Center. Here’s handy map:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/KSS_2014_Monday.png&quot; alt=&quot;KSS Map Day 1&quot; title=&quot;KSS Map Day 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/silo/images/KSS_2014_Monday.png&quot; alt=&quot;KSS Map Day 1&quot; title=&quot;KSS Map Day 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Come visit us if you want to work on data warehousing, etc. Hopefully we can find a home base (I’m thinking the Grit or Optimism Lounges once they open).  &lt;/p&gt;
 
@@ -518,8 +507,8 @@
 
 </description>
         <pubDate>Mon, 28 Jul 2014 06:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/28/KSS-day-one/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/28/KSS-day-one/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/28/KSS-day-one/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/28/KSS-day-one/</guid>
         
         
       </item>
@@ -538,8 +527,8 @@
 
 </description>
         <pubDate>Tue, 15 Jul 2014 17:00:00 -0500</pubDate>
-        <link>http://kippdata.github.io/silo/2014/07/15/first_commit/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/2014/07/15/first_commit/</guid>
+        <link>http://kippdata.github.io/silo/silo/2014/07/15/first_commit/</link>
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/15/first_commit/</guid>
         
         
       </item>
