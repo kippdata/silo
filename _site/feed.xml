@@ -5,8 +5,8 @@
     <description>A silo is &#39;a deep bin for storing material&#39; as is KIPP Silo. KIPP Silo is the KIPP Network&#39;s Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.</description>
     <link>http://kippdata.github.io/silo/silo/</link>
     <atom:link href="http://kippdata.github.io/silo/silo/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 19 Aug 2015 12:35:33 -0500</pubDate>
-    <lastBuildDate>Wed, 19 Aug 2015 12:35:33 -0500</lastBuildDate>
+    <pubDate>Wed, 19 Aug 2015 12:43:18 -0500</pubDate>
+    <lastBuildDate>Wed, 19 Aug 2015 12:43:18 -0500</lastBuildDate>
     <generator>Jekyll v1.5.1</generator>
     
       <item>
@@ -32,7 +32,20 @@
 
 &lt;p&gt;You simply substitute your own credentials.  Easiest use is to set up a DNS directly to where in SQL Server instance you’ll store these data.&lt;/p&gt;
 
-&lt;p&gt;You then need to &lt;a href=&quot;http://technet.microsoft.com/en-us/library/cc766428.aspx&quot;&gt;set up a Task Scheduler job&lt;/a&gt; to hit the &lt;code&gt;sf_get_and_load.py&lt;/code&gt;.  You will in all likelihood need to use a 64-bit Python interpretor, since the &lt;code&gt;Account&lt;/code&gt; table in the Alumni DB is huge and the &lt;code&gt;pandas&lt;/code&gt; package won’t be able to handle it in 32-bit Python. The (Anaconda distribtuion is great)[https://store.continuum.io/cshop/anaconda/].&lt;/p&gt;
+&lt;p&gt;The other two files are &lt;code&gt;databaseconfig.py&lt;/code&gt; and &lt;code&gt;sf_get_and_load.py&lt;/code&gt;.  The first one is a module that is imported into the second and has some resuable functions that can be used to connect to SQL Server as well as  push data from a &lt;code&gt;pandas dataframe&lt;/code&gt; up to SQL server.  It creates a new table if that data is new; otherwise it trunctes the table and appends you data.  Not as sophisticated as an upsert, but for most integrations good enough.  &lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;sf_get_and_load.py&lt;/code&gt; is were the magic happens. It pulls five tables from the Alumni DB, creates dataframes for each, and then loads each up to SQL server.  The five tables are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Account&lt;/code&gt;, &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Contact&lt;/code&gt;, &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;College_Persistence__c&lt;/code&gt;, &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Contact&lt;/code&gt;, &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Contact_Note__c&lt;/code&gt;, &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Enrollment__c&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;http://technet.microsoft.com/en-us/library/cc766428.aspx&quot;&gt;set up a Task Scheduler job&lt;/a&gt; to hit the &lt;code&gt;sf_get_and_load.py&lt;/code&gt;.  You will in all likelihood need to use a 64-bit Python interpretor, since the &lt;code&gt;Account&lt;/code&gt; table in the Alumni DB is huge and the &lt;code&gt;pandas&lt;/code&gt; package won’t be able to handle it in 32-bit Python. The (Anaconda distribtuion is great)[https://store.continuum.io/cshop/anaconda/].&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 19 Aug 2015 07:00:00 -0500</pubDate>
