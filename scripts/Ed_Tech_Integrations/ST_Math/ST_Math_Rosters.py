@@ -3,7 +3,7 @@ This script integrates PowerSchool with ST Math by pulling data down
 from KIPP Silo linked PowerSchool, creates two files (students.csv and teachers.csv)
 and then pass those two files to ST Math vai SFTP.
 
-You must fill in the fields in ST_Math.config to match your ***REMOVED*** instance, 
+You must fill in the fields in ST_Math.config to match your silo instance, 
 any conditions on your students you need (grade levels, schools, etc.) using a Oracle SQL WHERE 
 conditions (no need to quote) in the condition argument.  Leaving the argument blank will 
 pull all of your currently enrolled students. 

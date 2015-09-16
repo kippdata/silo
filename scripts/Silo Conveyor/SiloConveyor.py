@@ -9,12 +9,12 @@ from sqlalchemy import *
 
 def load_config():
     """
-    Loads our configuaration file, ***REMOVED***conv.cfg, located in the same folder
+    Loads our configuaration file, siloconv.cfg, located in the same folder
     """
     try:
-        f = open('***REMOVED***conv.cfg')
+        f = open('siloconv.cfg')
     except IOError as err:
-        print('Problem opening ***REMOVED***conv.cfg!')
+        print('Problem opening siloconv.cfg!')
     else:
         with f:
             #Global variable config to be used in other parts
@@ -40,7 +40,7 @@ def db_connect():
 
 def generate_db_url():
     """
-    Generates the sqlalchemy database url, dependant on setting in ***REMOVED***conv.cfg
+    Generates the sqlalchemy database url, dependant on setting in siloconv.cfg
     :return:String of database url
     """
     base = ''
