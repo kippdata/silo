@@ -100,9 +100,11 @@ In order to link to your own SQL Server instance from outside of SQL Server Mana
 
 Now give the new user a name (say, "silo"), click the radio button for **SQL Server authentication** and give that user a password. 
 
+
 Uncheck the "Enforce password expiration". 
 
 Select "KIPP_Silo" (or whatever you named the DB above) in the Default Database dropdown.
+
 
 ![Create DB User]({{ site.baseurl }}/images/create_silo_user_1.png "Create Silo User Step 1")
 
@@ -176,6 +178,7 @@ Click on the **Start** button, then on the **Start Page** click the downward poi
 Expand **SQL Server Network Configuration** and click on **Protocols for MSSQLSERVER*.  
 
 ![Config 1]({{ site.baseurl }}/images/config_1.png "Config 1")
+
 
 Right-click on **TCP/IP** and select **Properties**. Click on the **IP Addresses** tab.  Scroll down to **IP4** and verify that is for your local hose (127.0.0.1).  Set the **Active** and **Enabled** properties to **YES**.
 

@@ -50,8 +50,7 @@
 </description>
         <pubDate>Wed, 19 Aug 2015 07:00:00 -0500</pubDate>
         <link>http://kippdata.github.io/silo/silo/2015/08/19/Alumni_DB_Integration/</link>
-        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2015/08/19/Alumni_DB_Integration/</guid>
-        
+        <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2015/08/19/Alumni_DB_Integration/</guid>        
         
       </item>
     
@@ -174,6 +173,7 @@
 
 &lt;p&gt;Select “KIPP_Silo” (or whatever you named the DB above) in the Default Database dropdown.&lt;/p&gt;
 
+
 &lt;p&gt;&lt;img src=&quot;/silo/images/create_silo_user_1.png&quot; alt=&quot;Create DB User&quot; title=&quot;Create Silo User Step 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on &lt;strong&gt;User Mapping&lt;/strong&gt; under &lt;strong&gt;Select a page&lt;/strong&gt;.  Click the checkbox next to ‘KIPP_Silo’ and ensure that the checkboxes next to db_datawriter, db_datareader, and public are checked.  Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
@@ -246,7 +246,11 @@
 &lt;p&gt;Click on the &lt;strong&gt;Protocol&lt;/strong&gt; tab and verify &lt;strong&gt;Enabled&lt;/strong&gt; and &lt;strong&gt;Listen All&lt;/strong&gt; are set to &lt;strong&gt;Yes&lt;/strong&gt;. Click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Finally, restart your SQL Server Services. In the left-hand navigation pane click on &lt;strong&gt;SQL Server Services&lt;/strong&gt;, then right click on &lt;strong&gt;SQL Server (MSSQLSERVER)&lt;/strong&gt; and select &lt;strong&gt;Restart&lt;/strong&gt;.
+<<<<<<< HEAD
 &lt;img src=&quot;/silo/images/config_3.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
+=======
+&lt;img src=&quot;/***REMOVED***/images/config_3.png&quot; alt=&quot;Config 3&quot; title=&quot;Config 3&quot; /&gt;&lt;/p&gt;
+>>>>>>> bfea0a51067761eafb8c837c1e2f779872c4b8fd
 
 &lt;p&gt;That’s it.  You should now have a SQL Server instance that be accessed locally by your own scripts and a clear view of your linked PowerSchool Instance.  &lt;/p&gt;
 
@@ -256,7 +260,6 @@
         <pubDate>Tue, 16 Sep 2014 15:00:00 -0500</pubDate>
         <link>http://kippdata.github.io/silo/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</link>
         <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/09/16/Setting_Up_PoweSchool_on_SQL_Server/</guid>
-        
         
       </item>
     
@@ -321,6 +324,7 @@
 
 &lt;h3 id=&quot;configure-instance-details&quot;&gt;Configure Instance Details&lt;/h3&gt;
 &lt;p&gt;This will be quick and easy.  You don’t need to change anything if you don’t want to.  For the sake of safety, though, I like to check the &lt;strong&gt;Protect against accidental termination&lt;/strong&gt; box.  Why?  Well terminating and instance kills it forever. In lieu of terminating an instance, we can stop the instance, which saves the state of the instance and shuts down the server (which can save you money).  You can always restart a stopped instance, but terminated instances are gone forever. Whether you check that box or not, go ahead and click &lt;strong&gt;6. Configure Security Group&lt;/strong&gt; on the breadcrumb trail at the top of the page. (I’m skipping &lt;strong&gt;Add Storage&lt;/strong&gt; and &lt;strong&gt;Tag Instance&lt;/strong&gt;.  You can continue through those steps if you want, as they are pretty self-explanatory, but the default storage should be sufficient and tags are cool but not necessary.)&lt;/p&gt;
+
 
 &lt;p&gt;&lt;img src=&quot;/silo/images/6-Configure_Instance.png&quot; alt=&quot;AWS Configure Instance&quot; title=&quot;AWS Configure Instance&quot; /&gt;&lt;/p&gt;
 
@@ -420,12 +424,12 @@
         <link>http://kippdata.github.io/silo/silo/2014/07/30/KSS-day-three/</link>
         <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/30/KSS-day-three/</guid>
         
-        
       </item>
     
       <item>
         <title>KIPP Silo @ KSS Day 2 Afternoon Location</title>
         <description>&lt;p&gt;We are now in the Grit Lounge (352 B, which is right next to the Optimism Lounge): &lt;/p&gt;
+
 
 &lt;p&gt;&lt;img src=&quot;/silo/images/KSS_2014_Tuesday_pm.png&quot; alt=&quot;KSS Map Day 2 pm&quot; title=&quot;KSS Map Day 2 pm&quot; /&gt;&lt;/p&gt;
 
@@ -542,7 +546,6 @@
         <pubDate>Tue, 15 Jul 2014 17:00:00 -0500</pubDate>
         <link>http://kippdata.github.io/silo/silo/2014/07/15/first_commit/</link>
         <guid isPermaLink="true">http://kippdata.github.io/silo/silo/2014/07/15/first_commit/</guid>
-        
         
       </item>
     

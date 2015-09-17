@@ -46,7 +46,11 @@ This is the screen where you will need to pick the [Amazon Machine Image](http:/
 
 ### Choose Instance Type
 
+<<<<<<< HEAD
 Here you pick your server size, configuration, and type.  The cheapest you can buy from the on-demand instances (i.e., a pay-as-you-go plan) is the m3.medium that runs you $0.36/hour.  You can drop that price in half to $0.16/hour by paying a little bit upfront ($1061) for a longer commitment (3-years). That's only about $5,300 over three years (i.e., $1,764/year) to have your Silo data warehouse hosted in the cloud.  Not to shabby given what your region is paying to ed tech companies to silo all of your data (ha! See what I did there).
+=======
+Here you pick your server size, configuration, and type.  The cheapest you can buy from the on-demand instances (i.e., a pay-as-you-go plan) is the m3.medium that runs you $0.36/hour.  You can drop that price in half to $0.16/hour by paying a little bit upfront ($1061) for a longer commitment (3-years). That's only about $5,300 over three years (i.e., $1,764/year) to have your Silo data warehouse hosted in the cloud.  Not to shabby given what your region is paying to ed tech companies to ***REMOVED*** all of your data (ha! See what I did there).
+>>>>>>> bfea0a51067761eafb8c837c1e2f779872c4b8fd
 
 So choose the m3.medium instance and click the **Next: Configure Instance Details** button
 ![AWS Choose Instance]({{ site.baseurl }}/images/5-Choose_Instance.png "AWS Choose Instance")

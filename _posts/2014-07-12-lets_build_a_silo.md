@@ -8,6 +8,7 @@ I'm pleased to announce that the [KIPP Network Normed Data Warehouse](https://ww
 
 ![KIPP Silo]({{ site.baseurl }}/images/KIPP_Silo_1.png "KIPP Silo")
 
+<<<<<<< HEAD
 A silo is 'a deep bin for storing material' as is KIPP Silo. KIPP Silo is the KIPP Network's Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution.
 
 Right now things are bare bones, save for the fact we have a [GitHub repo](https://github.com/kippdata/silo) which can be cloned or (probably) more likely forked for indiviudal development and collaboration.  In other words, anybody (well anybody who know's how to use GitHub right now) can start writing and sharing code **right now**! 
