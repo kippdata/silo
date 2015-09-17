@@ -1,0 +1,15 @@
+# Site settings
+title: KIPP Silo
+email: chaid@kippchicago.org
+description: "A silo is 'a deep bin for storing material' as is KIPP Silo. KIPP Silo is the KIPP Network's Self-organized, Iterative, Late-binding (or Lightweight), and Open-source (for now) data warehouse solution."
+baseurl: "/silo"
+url: "http://kippdata.github.io/silo"
+twitter_username: chrishaid
+github_username:  kippdata/silo
+gems:
+  - jekyll-mentions
+# Build settings
+markdown: kramdown
+permalink: pretty
+kramdown:
+     input: GFM
